@@ -1,0 +1,22 @@
+//Variables de colores Estandar
+$background_button: rgb(195, 155, 211);
+$color_button : rgb(253, 254, 254);
+
+.btn-button{
+    background: $background_button;
+    color: $color_button;
+    border-radius: 10;
+    font-size: 16;
+    height: 45;
+    margin: 10%;
+    padding: 10%;
+    margin-bottom: 5%;
+    width: 90%;
+}
+
+.text{
+    font-size: 200%;
+    color : black;
+    padding: 20px;
+    font-weight: bold;
+}
