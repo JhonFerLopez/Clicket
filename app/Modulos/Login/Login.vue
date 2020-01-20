@@ -81,7 +81,7 @@
           });
           return;
         }
-        console.log("inicio a axios");
+        console.log("inicio a axios "+this.$store.getters.getServerPath);
         this.processing = true;
 
         axios
@@ -90,6 +90,7 @@
           })
           .then(response => {
             console.log(response.data);
+            
             this.processing = false;
             this.$store.dispatch("addUserEmail", this.user.email);
 
@@ -103,6 +104,7 @@
           .catch(err => {
             this.processing = false;
             console.log(err);
+            console.log(err.response);
             alert({
               title: "Campos incorrectos",
               message: "El email es incorrecto",

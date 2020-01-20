@@ -13,7 +13,7 @@ const store = new Vuex.Store({
     user: {
       name: 'Andres',
       last_name: 'Arcila',
-      email: 'andres.arcila@ziel.com.co',
+      email: 'andresarcila@me.com',
     }
   },
   //Funciones de Cambio de Estado
@@ -41,6 +41,9 @@ const store = new Vuex.Store({
     },
     addUserEmail: (context, payload) => {
       context.commit('ADD_USER_EMAIL', payload)
+    },
+    logOut: (context) => {
+      context.commit('LOG_OUT')
     }
   },
   // Funciones que retornan Valores/Datos de lo Componentes
@@ -48,7 +51,8 @@ const store = new Vuex.Store({
     getServerPath: state => state.server,
     getToken: state => state.token,
     getLoginUser: state => state.user,
-    getRole: state => state.role
+    getRole: state => state.role,
+    isLogged: state => state.logged
     /*
     getTransport: state => state.transport,
     isWatingForService: state => state.watingForService,

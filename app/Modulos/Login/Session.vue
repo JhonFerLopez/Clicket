@@ -1,6 +1,6 @@
 <template>
     <Page>
-        <ActionBar title="Registro De Usuario" >
+        <ActionBar title="Solicitud de Contraseña" >
             <NavigationButton 
                 text="Go Back" 
                 android.systemIcon="ic_menu_back"
@@ -53,7 +53,7 @@ export default {
                 email: this.$store.getters.getLoginUser
                 ? this.$store.getters.getLoginUser.email
                 : "",
-                password: "andres.arcila@ziel.com.co"
+                password: ""
             }
         };
     },
@@ -93,7 +93,7 @@ export default {
                 //impresion en datos en Consola
                 console.log(this.user.email);
                 console.log(this.user.password);
-                console.log(response.data);
+                console.log("->Datos "+response.data.access_token+" <-");
 
                 let token = `Bearer ${response.data.access_token}`;
 
