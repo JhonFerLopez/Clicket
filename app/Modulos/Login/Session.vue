@@ -7,12 +7,6 @@
                 android.position="left"
                 @tap="goBack"
             ></NavigationButton>
-            <ActionItem 
-                ios.systemIcon="2" 
-                android.systemIcon="ic_menu_edit" 
-                ios.position="right"
-                @tap="goBack"
-            ></ActionItem>
         </ActionBar>    
 
         <StackLayout >

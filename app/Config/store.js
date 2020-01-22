@@ -13,7 +13,7 @@ const store = new Vuex.Store({
     user: {
       name: 'Andres',
       last_name: 'Arcila',
-      email: 'andresarcila@me.com',
+      email: 'andres.arcila@ziel.com.co',
     }
   },
   //Funciones de Cambio de Estado

@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
     <page>
         <ActionBar title="Usuario" >
             <NavigationButton 
@@ -14,18 +14,43 @@
                 @tap="logout"
             ></ActionItem>
         </ActionBar> 
-        <StackLayout >
-            <label :text="user.name"></label>
-            <label :text="user.email"></label>
-        </StackLayout >
+        <TabView 
+            androidTabsPosition="bottom"
+            tabTextFontSize="16"
+            tabBackgroundColor="rgba(232,232,232,1)"
+            selectedTabTextColor="rgb(0,0, 0)"
+            :selectedIndex="selectedIndex" 
+            @selectedIndexChange="indexChange">
+
+            <TabViewItem title="Tab 1" iconSource="">
+                <Frame>
+                    <CInterests/>
+                </Frame>
+            </TabViewItem>
+            <TabViewItem title="Tab 2">
+                <Frame>
+                    <CLabel :PText="'Texto Tab 2'" />
+                </Frame>
+            </TabViewItem>
+            <TabViewItem title="Tab 3">
+                <Frame>
+                    <CLabel :PText="'Texto Tab 3'" />
+                </Frame>
+            </TabViewItem>
+            <TabViewItem title="Tab 4">
+                <Frame>
+                    <CLabel :PText="'Texto Tab 4'" />
+                </Frame>
+            </TabViewItem>
+        </TabView>
     </page>
 </template>
 
 <script>
-
-    import axios from "axios";
-    import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
-    //import * as utils from "utils/utils";
+    import {goToSection } from "~/../app/helpers/index.js";
+    //Llamado a componentes
+    import CInterests from './../components/CInterests';
+    import CLabel from './../components/CLabel';
 
     export default {
         data() {
@@ -36,11 +61,15 @@
                 }
             };
         },
-        created() {
-            AuthAxiosToken(axios, this);
-            this.getUser();
+        components : {
+            CInterests,
+            CLabel
         },
         methods: {//Metodos de la Pagina
+            indexChange: function(args) {
+                let newIndex = args.value
+                console.log('Current tab index: ' + newIndex)
+            },
             goBack() {
                 goToSection(this, this.$router.session, {}, "slideRight", true);
             },
@@ -52,17 +81,6 @@
                     console.log("Session Terminada");
                     this.$store.dispatch("logOut");
                     goToSection(this, this.$router.login, {}, "slideRight", true);
-                })
-                .catch(response => {
-                    console.log(response.data.errors);
-                });
-            },
-            getUser(){
-                axios
-                .get(`${this.$store.getters.getServerPath}/auth/user`)
-                .then(response => {
-                    this.user.name = response.data.name;
-                    this.user.email = response.data.email;
                 })
                 .catch(response => {
                     console.log(response.data.errors);
