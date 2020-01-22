@@ -1,12 +1,5 @@
 <template>
     <page actionBarHidden="true">      
-        <ListView for="(detalle, index) in datos" @itemTap="onItemTap" >
-            <FlexboxLayout>
-                <Label :text="detalle.name+'hoaalalalal'"></Label>  
-                <Image src="~/assets/images/offer/automoviles.png"></Image> 
-            </FlexboxLayout>
-        </ListView >
-        <!---
         <ScrollView orientation="vertical" class="scroll-height full-width">
             <FlexboxLayout
                 flexDirection="column"
@@ -15,18 +8,15 @@
                 class="full-width"
             >
                 <StackLayout v-if="datos.length > 0">
-                    <ListView for="detalle in datos" @itemTap="onItemTap" >
-                        <StackLayout>
-                            <FlexboxLayout>
-                                <Label :text="detalle.name+'hoaalalalal'"></Label>  
-                                <Image src="~/assets/images/offer/automoviles.png"></Image> 
-                            </FlexboxLayout>
-                        </StackLayout>
-                    </ListView >
+                    <StackLayout v-for="detalle in datos" :key="detalle.id">
+                        <FlexboxLayout>
+                            <Label :text="detalle.name"></Label>  
+                            <Image src="~/assets/images/offer/automoviles.png"></Image> 
+                        </FlexboxLayout>
+                    </StackLayout>
                 </StackLayout>
             </FlexboxLayout>
         </ScrollView>
-        -->
     </page>
 </template>
 
@@ -37,8 +27,7 @@
     export default {
         data() {
             return {
-                datos : [],
-                datosInterests : []
+                datos : []
             };
         },
         created() {
@@ -46,10 +35,6 @@
             this.getInteres();
         },
         methods: {//Metodos de la Pagina
-            onItemTap(event) {
-                //console.log(event.index)
-                console.log(event.name)
-            },
             getInteres(){
                 axios
                 .get(`${this.$store.getters.getServerPath}/tags`)
