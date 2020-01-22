@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "axios": "^0.19.1",
+    "nativescript-ui-listview": "^8.0.1",
     "nativescript-vue": "^2.4.0",
     "tns-core-modules": "^6.0.0",
     "vue-axios": "^2.1.5",

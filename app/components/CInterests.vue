@@ -1,11 +1,13 @@
 <template>
     <page actionBarHidden="true">      
-        <ListView for="(detalle, index) in datos" @itemTap="onItemTap" >
+        <RadListView ref="listView" 
+            for="(detalle, index) in datos" 
+            @itemTap="onItemTap" >
             <FlexboxLayout>
                 <Label :text="detalle.name+'hoaalalalal'"></Label>  
                 <Image src="~/assets/images/offer/automoviles.png"></Image> 
             </FlexboxLayout>
-        </ListView >
+        </RadListView >
         <!---
         <ScrollView orientation="vertical" class="scroll-height full-width">
             <FlexboxLayout
@@ -33,7 +35,7 @@
 <script>
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
-
+    
     export default {
         data() {
             return {
