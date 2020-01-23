@@ -47,7 +47,8 @@
 </template>
 
 <script>
-    import {goToSection } from "~/../app/helpers/index.js";
+    import axios from "axios";
+    import {AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     //Llamado a componentes
     import CInterests from './../components/CInterests';
     import CLabel from './../components/CLabel';
@@ -60,6 +61,9 @@
                     email : ""
                 }
             };
+        },
+        created() {
+            AuthAxiosToken(axios, this); 
         },
         components : {
             CInterests,

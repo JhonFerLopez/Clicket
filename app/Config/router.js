@@ -5,6 +5,7 @@ import Register from "~/Modulos/Login/Register.vue";
 
 //importacion de Librerias Modulos
 import Welcome from "~/Modulos/Welcome.vue";
+import Category from "~/Modulos/Category.vue";
 
 
 //Declaracion de Rutas con variables 
@@ -13,6 +14,7 @@ const routes = {
     session : Session,
     register : Register,
     welcome : Welcome,
+    category : Category,
     text : 'Pruebas'
 }
 

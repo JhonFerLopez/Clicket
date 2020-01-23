@@ -1,16 +1,19 @@
 <template>
-    <page actionBarHidden="true">      
-        <!---
-        <RadListView 
-            ref="listView" 
-            for="(item, index) in itemList" 
-            @itemTap="onItemTap" >
-            <FlexboxLayout>
-                <Label :text="item.name + 'hoaalalalal'"></Label>  
-                <Image src="~/assets/images/offer/automoviles.png"></Image> 
-            </FlexboxLayout>
-        </RadListView >
-        --> 
+    <page>      
+        <ActionBar title="Categorias" >
+            <NavigationButton 
+                text="Go Back" 
+                android.systemIcon="ic_menu_back"
+                android.position="left"
+                @tap="goBack"
+            ></NavigationButton>
+            <ActionItem 
+                ios.systemIcon="3" 
+                android.systemIcon="ic_menu_save" 
+                ios.position="right"
+                @tap="save"
+            ></ActionItem>
+        </ActionBar> 
 
         <FlexboxLayout 
             flexDirection="column" 
@@ -50,9 +53,7 @@
 <script>
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
-    import CLabel from './CLabel';
-    //import Vue from 'nativescript-vue';
-    //import RadListView from 'nativescript-ui-listview/vue';   
+    import CLabel from './../components/CLabel';
 
     export default {
         data() {
@@ -66,15 +67,13 @@
             CLabel
         },
         created() {
-            AuthAxiosToken(axios, this); 
-            //Vue.use(RadListView);           
+            AuthAxiosToken(axios, this);           
             this.getInteres();
             console.log("created");
         },
         methods: {//Metodos de la Pagina
-            onItemTap(event) {
-                //console.log(event.index)
-                console.log(event.name)
+            goBack() {
+                goToSection(this, this.$router.welcome, {}, "slideRight", true);
             },
             showOffer(payload) {
                 console.log("Item Seleccionado-> " + payload.id + " name: " + payload.name);
@@ -114,6 +113,9 @@
                     console.log(response.data);
                     console.log(response.data.errors);
                 });
+            },
+            save() {
+                console.log("Hola Grabando");
             }
         },
         computed : {

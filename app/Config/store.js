@@ -1,9 +1,8 @@
 import Vue from 'nativescript-vue';
 import Vuex from 'vuex';
-import RadListView from 'nativescript-ui-listview/vue';
+
 
 Vue.use(Vuex);
-Vue.use(RadListView);
 
 const store = new Vuex.Store({
   state: {

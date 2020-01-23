@@ -23,7 +23,7 @@
 
 <style scoped>
   .text{
-      font-size: 16%;
+      font-size: 16px;
       color : black;
       padding: 20px;
       margin: 10px;
