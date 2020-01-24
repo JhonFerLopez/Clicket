@@ -103,7 +103,7 @@ export default {
                 console.log(user);
 
                 if (user != null) {
-                    goToSection(this, this.$router.category, {}, "fade", true);
+                    goToSection(this, this.$router.welcome, {}, "fade", true);
                 } 
             })
             .catch(err => {

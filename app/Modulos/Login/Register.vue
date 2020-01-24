@@ -133,7 +133,7 @@
                                 console.log("Register.Vue-->ObjUser "+Object.values(user));
 
                                 if (user != null) {
-                                    goToSection(this, this.$router.welcome, {}, "fade", true);
+                                    goToSection(this, this.$router.category, {}, "fade", true);
                                 }
                             });
                         })

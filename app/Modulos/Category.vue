@@ -1,6 +1,6 @@
 <template>
     <page>      
-        <ActionBar title="Categorias" >
+        <ActionBar title="Categoria" >
             <NavigationButton 
                 text="Go Back" 
                 android.systemIcon="ic_menu_back"
@@ -115,14 +115,41 @@
                 });
             },
             save() {
-                console.log("Hola Grabando");
+                var error = false;
+                for(const datos of this.datosInterests){                    
+                    console.log("Save Categoria--> "+datos.id);
+                    axios
+                    .post(`${this.$store.getters.getServerPath}/auth/interest/add`, {
+                        id: datos.id
+                    },)
+                    .catch(err => {
+                        var error = true;
+                        this.processing = false;
+                        alert({
+                            title: "Error en Aplicativo",
+                            message: "No Pudo Guardar La Categoria "+datos.name,
+                            okButtonText: "ERROR"
+                        });
+                    });
+                }
+                if(!error){
+                    alert({
+                        title: "Registro Exitoso",
+                        message: "Bienvenido A Clicket",
+                        okButtonText: "OK"
+                    })
+                    .then(() => {
+                        goToSection(this, this.$router.welcome, {}, "fade", true);
+                    });
+                }
+                console.log("Hola Grabando 1");
             }
         },
         computed : {
             CategoriaSeleccionada(){
                 this.info = "";
                 for(const datos of this.datosInterests){
-                    console.log("CategoriaSeleccionada--> "+datos.id);
+                    console.log("Categoria Seleccionada--> "+datos.id);
                     if(this.info == ""){
                         this.info = datos.name;
                     }

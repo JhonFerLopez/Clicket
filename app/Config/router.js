@@ -15,7 +15,9 @@ const routes = {
     register : Register,
     welcome : Welcome,
     category : Category,
-    text : 'Pruebas'
+    testeo : function(str) {
+        console.log("Testeo Router "+str);
+    }
 }
 
 export default routes;// Retorno de Rutas
