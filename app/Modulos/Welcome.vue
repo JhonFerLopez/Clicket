@@ -1,18 +1,6 @@
 <template lang="html">
     <page>
-        <ActionBar title="Usuario" >
-            <NavigationButton 
-                text="Go Back" 
-                android.systemIcon="ic_menu_back"
-                android.position="left"
-                @tap="goBack"
-            ></NavigationButton>
-            <ActionItem 
-                ios.systemIcon="1" 
-                android.systemIcon="ic_menu_close_clear_cancel" 
-                ios.position="right"
-                @tap="logout"
-            ></ActionItem>
+        <ActionBar title="CLICKET">
         </ActionBar> 
         <TabView 
             androidTabsPosition="bottom"
@@ -20,26 +8,30 @@
             tabBackgroundColor="rgba(232,232,232,1)"
             selectedTabTextColor="rgb(0,0, 0)"
             :selectedIndex="selectedIndex" 
-            @selectedIndexChange="indexChange">
+            @selectedIndexChange="indexChange">            
 
             <TabViewItem title="Tab 1" iconSource="">
+                <!--componente : Recibe Propiedades -->
                 <Frame>
                     <CInterests/>
                 </Frame>
             </TabViewItem>
             <TabViewItem title="Tab 2">
+                <!--componente : Recibe Propiedades -->
                 <Frame>
-                    <CLabel :PText="'Texto Tab 2'" />
+                    <Categories />
                 </Frame>
             </TabViewItem>
             <TabViewItem title="Tab 3">
+                <!--componente : Recibe Propiedades -->
                 <Frame>
                     <CLabel :PText="'Texto Tab 3'" />
                 </Frame>
             </TabViewItem>
             <TabViewItem title="Tab 4">
+                <!--componente : Recibe Propiedades -->
                 <Frame>
-                    <CLabel :PText="'Texto Tab 4'" />
+                    <User />
                 </Frame>
             </TabViewItem>
         </TabView>
@@ -47,49 +39,43 @@
 </template>
 
 <script>
+    //LLamado a Axios: Conexion API a BD.
     import axios from "axios";
     import {AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     //Llamado a componentes
     import CInterests from './../components/CInterests';
     import CLabel from './../components/CLabel';
+    import User from './../Modulos/User';
+    import Categories from './../Modulos/Categories';
 
     export default {
+        //Variables
         data() {
             return {
+                buscador : "",
                 user : {
                     name : "", 
                     email : ""
                 }
             };
         },
+        //Inicializador
         created() {
             AuthAxiosToken(axios, this); 
         },
+        //LLamado a Componentes
         components : {
             CInterests,
-            CLabel
+            CLabel,
+            User,
+            Categories
         },
-        methods: {//Metodos de la Pagina
+        //Metodos de la Pagina
+        methods: {
             indexChange: function(args) {
                 let newIndex = args.value
                 console.log('Current tab index: ' + newIndex)
-            },
-            goBack() {
-                goToSection(this, this.$router.session, {}, "slideRight", true);
-            },
-            logout() {
-                console.log("Cierre de Session");
-                axios
-                .post(`${this.$store.getters.getServerPath}/auth/logout`)
-                .then(response => {
-                    console.log("Session Terminada");
-                    this.$store.dispatch("logOut");
-                    goToSection(this, this.$router.login, {}, "slideRight", true);
-                })
-                .catch(response => {
-                    console.log(response.data.errors);
-                });
-            }
+            }            
         }
     }
 </script>

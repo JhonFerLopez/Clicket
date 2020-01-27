@@ -1,99 +1,75 @@
 <template>
-    <page actionBarHidden="true">      
-        <!---
-        <RadListView 
-            ref="listView" 
-            for="(item, index) in itemList" 
-            @itemTap="onItemTap" >
-            <FlexboxLayout>
-                <Label :text="item.name + 'hoaalalalal'"></Label>  
-                <Image src="~/assets/images/offer/automoviles.png"></Image> 
-            </FlexboxLayout>
-        </RadListView >
-        --> 
-
+    <page actionBarHidden="true">    
         <FlexboxLayout 
             flexDirection="column" 
-            width="100%"             
-        > 
-            <FlexboxLayout
-                flexDirection="column"
-                height="100"
-            >
-                <StackLayout>  
-                    <Frame>
-                        <CLabel :PText="'Mis Intereses: ' + CategoriaSeleccionada" />
-                    </Frame>  
-                </StackLayout>
-            </FlexboxLayout>
-            <ScrollView orientation="vertical" class="scroll-height full-width">
-                <FlexboxLayout
-                    flexDirection="column"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    class="full-width"
-                >                            
-                    <StackLayout v-if="datos.length > 0">
-                        <StackLayout v-for="detalle in datos" :key="detalle.id">
-                            <FlexboxLayout flexDirection="column" @tap="showOffer(detalle)">
-                                <Label :text="detalle.name"></Label>
-                                <Image src="~/assets/images/offer/automoviles.png"></Image> 
-                            </FlexboxLayout>
-                        </StackLayout>
-                    </StackLayout>
-                </FlexboxLayout>
-            </ScrollView>
+            width="50%"            
+        >          
+            <TextField
+                class="input-login"
+                hint="buscador"
+                autocorrect="false"
+                autocapitalizationType="none"
+                v-model="buscador"
+                returnKeyType="next"
+                @returnPress="submit"
+            ></TextField>
+
         </FlexboxLayout>
+
+        <ScrollView orientation="vertical" class="scroll-height full-width">
+            <ListView for="item in items" @itemTap="onItemTap">
+                <v-template>
+                    <FlexboxLayout flexDirection="column">
+                        <Label :text="item.titulo" textWrap="true" ></Label>
+                        <Image src="~/assets/images/offer/turismo.png" ></Image>
+                    </FlexboxLayout>
+                </v-template>
+            </ListView>   
+        </ScrollView>
     </page>
 </template>
 
 <script>
+    //LLamado a Axios: Conexion API a BD.
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
+    //Llamado a componentes
     import CLabel from './CLabel';
-    //import Vue from 'nativescript-vue';
-    //import RadListView from 'nativescript-ui-listview/vue';   
 
     export default {
+        //Variables
         data() {
             return {
-                datos : [],
+                items : [],
                 datosInterests : [],
                 info : ""
             };
         },
+        //Inicializador
         components : {
             CLabel
         },
+        //LLamado a Componentes
         created() {
             AuthAxiosToken(axios, this); 
-            //Vue.use(RadListView);           
             this.getInteres();
-            console.log("created");
         },
-        methods: {//Metodos de la Pagina
-            onItemTap(event) {
-                //console.log(event.index)
-                console.log(event.name)
-            },
-            showOffer(payload) {
-                console.log("Item Seleccionado-> " + payload.id + " name: " + payload.name);
+        //Metodos de la Pagina
+        methods: {            
+            onItemTap(payload) {
                 var acction = this.validaInteres(payload.id);
                 if(acction[0]){
                     this.datosInterests.push({
-                        id : payload.id ,  name : payload.name
+                        id : payload.id ,  title : payload.title
                     })
                 }else{
                     this.datosInterests.splice(acction[1],1);
                 }                
-                //goToSection(this, this.$routes.item, properties, "fade", false);
             },
-            validaInteres(index) {
-                console.log("validaInteres-> " + index);
+            validaInteres(index) { //Validacion de datos Repetidos 
                 let adicionar = [true, 0] ;
                 var i = 0 ;
                 for(const datos of this.datosInterests){
-                    console.log("item Validacion--> "+datos.id);                    
                     if(datos.id == index){
                         adicionar[0] = false;
                         adicionar[1] = i;
@@ -103,29 +79,31 @@
                 return adicionar;
             },            
             getInteres(){
-                console.log("Hola Interes");
+                //Consumo de la Api
                 axios
-                .get(`${this.$store.getters.getServerPath}/auth/tags`)
-                .then(response => {
-                    console.log("Datos-> "+response.data.data);
-                    this.datos = response.data.data;    
+                .get(`${this.$store.getters.getServerPath}/auth/posts`)
+                .then(response => {//Respuesta de la Api
+                    this.items = response.data.data;    
                 })
-                .catch(response => {
+                .catch(response => {//Respuesta de la Api en Caso De Error
                     console.log(response.data);
                     console.log(response.data.errors);
                 });
+            },
+            submit(){
+
             }
         },
+        //Metodos de Ejecuciones Automaticas y Constante.
         computed : {
             CategoriaSeleccionada(){
                 this.info = "";
                 for(const datos of this.datosInterests){
-                    console.log("CategoriaSeleccionada--> "+datos.id);
                     if(this.info == ""){
-                        this.info = datos.name;
+                        this.info = datos.title;
                     }
                     else{
-                        this.info = this.info + ", " + datos.name;
+                        this.info = this.info + ", " + datos.title;
                     }
                 }
                 return this.info;

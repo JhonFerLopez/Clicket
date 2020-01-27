@@ -38,7 +38,8 @@
     import CLabel from './../../components/CLabel';
 
 export default {
-    data() {//Variables
+    //Variables
+    data() {
         return {
             isLoggingIn: true,
             processing: false,
@@ -51,13 +52,16 @@ export default {
             }
         };
     },
-    created() {//Inicializador
+    //Inicializador
+    created() {
         AuthAxiosToken(axios, this);
     },
-    components : {//LLamado a Componentes
+    //LLamado a Componentes
+    components : {
         CLabel
     },
-    methods: {//Metodos de la Pagina
+    //Metodos de la Pagina
+    methods: {
         goBack() {
             goToSection(this, this.$router.login, {}, "slideRight", true);
         },
@@ -73,16 +77,16 @@ export default {
                 });
                 return;
             }
-
             this.processing = true;
 
+            //consumo de Api
             axios
             .post(`${this.$store.getters.getServerPath}/auth/login`, {
                 email: this.user.email,
                 password: this.user.password,
                 role: this.role
             },)
-            .then(response => {
+            .then(response => {//Respuesta de la Api
 
                 //impresion en datos en Consola
                 console.log(this.user.email);
@@ -97,18 +101,15 @@ export default {
                 this.$store.dispatch("addToken", token);
                 //Almacenar usuario
                 this.$store.dispatch("addLoginUser", response.data.user);
-
                 let user = response.data.user;
 
                 console.log(user);
-
                 if (user != null) {
                     goToSection(this, this.$router.welcome, {}, "fade", true);
                 } 
             })
-            .catch(err => {
+            .catch(err => {//Respuesta de la Api en Caso De Error
                 this.processing = false;
-
                 alert({
                     title: "Campos incorrectos",
                     message: "El email o contraseña son incorrectos",

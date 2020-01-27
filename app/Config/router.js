@@ -6,6 +6,8 @@ import Register from "~/Modulos/Login/Register.vue";
 //importacion de Librerias Modulos
 import Welcome from "~/Modulos/Welcome.vue";
 import Category from "~/Modulos/Category.vue";
+import Categories from "~/Modulos/Categories.vue";
+import SubCategories from "~/Modulos/SubCategories.vue";
 
 
 //Declaracion de Rutas con variables 
@@ -15,6 +17,8 @@ const routes = {
     register : Register,
     welcome : Welcome,
     category : Category,
+    categories : Categories,
+    subCategories : SubCategories,
     testeo : function(str) {
         console.log("Testeo Router "+str);
     }

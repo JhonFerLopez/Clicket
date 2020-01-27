@@ -43,12 +43,13 @@
 <script>
   //LLamado a Axios: Conexion API a BD.
   import axios from "axios";
-  import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";//Ayudas
+  import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";//Funciones
   //Llamado a componentes
   import CLabel from './../../components/CLabel';
 
   export default {
-    data() {//Variables
+    //Variables
+    data() {
       return {
         isLoggingIn: true,
         processing: false,
@@ -59,19 +60,16 @@
         }        
       }
     },
-    components : {//LLamado a Componentes
+    //LLamado a Componentes
+    components : {
       CLabel
     },
-    created() {//Inicializador
+    //Inicializador
+    created() {
       AuthAxiosToken(axios, this);
     },
-    methods: {//Metodos de la Pagina
-      goToRegister() {
-        goToSection(this, this.$router.register, {}, "slideLeft", true);
-      },
-      goToLogin() {
-        goToSection(this, this.$router.login, {}, "slideLeft", true);
-      },
+    //Metodos de la Pagina
+    methods: {
       submit() {//Submit: Verificacion de Correo
         if (!this.user.email) {
           alert({
@@ -84,11 +82,12 @@
         console.log("inicio a axios "+this.$store.getters.getServerPath);
         this.processing = true;
 
+        //consumo de Api
         axios
           .post(`${this.$store.getters.getServerPath}/auth/checkemail`, {
             email: this.user.email
           })
-          .then(response => {
+          .then(response => {//Respuesta de la Api
             console.log(response.data);
             
             this.processing = false;
@@ -101,7 +100,7 @@
               goToSection(this, this.$router.session, {}, "slideLeft", true);
             }
           })
-          .catch(err => {
+          .catch(err => {//Respuesta de la Api en Caso De Error
             this.processing = false;
             console.log(err);
             console.log(err.response);
@@ -110,8 +109,7 @@
               message: "El email es incorrecto",
               okButtonText: "OK"
             });
-          });
-          
+          });          
       }//Fin Submit
     }
   }

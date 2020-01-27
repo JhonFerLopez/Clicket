@@ -24,6 +24,7 @@
                 height="100"
             >
                 <StackLayout>  
+                    <!--componente : Recibe Propiedades -->
                     <Frame>
                         <CLabel :PText="'Mis Intereses: ' + CategoriaSeleccionada" />
                     </Frame>  
@@ -51,11 +52,14 @@
 </template>
 
 <script>
+    //LLamado a Axios: Conexion API a BD.
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
+    //Llamado a componentes
     import CLabel from './../components/CLabel';
 
     export default {
+        //Variables
         data() {
             return {
                 datos : [],
@@ -63,20 +67,20 @@
                 info : ""
             };
         },
+        //LLamado a Componentes
         components : {
             CLabel
         },
+        //Inicializador
         created() {
             AuthAxiosToken(axios, this);           
             this.getInteres();
-            console.log("created");
         },
         methods: {//Metodos de la Pagina
             goBack() {
                 goToSection(this, this.$router.welcome, {}, "slideRight", true);
             },
             showOffer(payload) {
-                console.log("Item Seleccionado-> " + payload.id + " name: " + payload.name);
                 var acction = this.validaInteres(payload.id);
                 if(acction[0]){
                     this.datosInterests.push({
@@ -87,12 +91,10 @@
                 }                
                 //goToSection(this, this.$routes.item, properties, "fade", false);
             },
-            validaInteres(index) {
-                console.log("validaInteres-> " + index);
+            validaInteres(index) {//Validacion de Selecciones Repetidas.
                 let adicionar = [true, 0] ;
                 var i = 0 ;
                 for(const datos of this.datosInterests){
-                    console.log("item Validacion--> "+datos.id);                    
                     if(datos.id == index){
                         adicionar[0] = false;
                         adicionar[1] = i;
@@ -102,11 +104,9 @@
                 return adicionar;
             },            
             getInteres(){
-                console.log("Hola Interes");
                 axios
                 .get(`${this.$store.getters.getServerPath}/auth/tags`)
                 .then(response => {
-                    console.log("Datos-> "+response.data.data);
                     this.datos = response.data.data;    
                 })
                 .catch(response => {
@@ -116,13 +116,13 @@
             },
             save() {
                 var error = false;
-                for(const datos of this.datosInterests){                    
-                    console.log("Save Categoria--> "+datos.id);
+                for(const datos of this.datosInterests){ 
+                    //Consumo de la Api                   
                     axios
                     .post(`${this.$store.getters.getServerPath}/auth/interest/add`, {
                         id: datos.id
                     },)
-                    .catch(err => {
+                    .catch(err => {//Respuesta de la Api en Caso De Error
                         var error = true;
                         this.processing = false;
                         alert({
@@ -132,7 +132,7 @@
                         });
                     });
                 }
-                if(!error){
+                if(!error){//Confirmacion de Registros.
                     alert({
                         title: "Registro Exitoso",
                         message: "Bienvenido A Clicket",
@@ -142,14 +142,13 @@
                         goToSection(this, this.$router.welcome, {}, "fade", true);
                     });
                 }
-                console.log("Hola Grabando 1");
             }
         },
+        //Metodos de Ejecuciones Automaticas y Constante.
         computed : {
             CategoriaSeleccionada(){
                 this.info = "";
                 for(const datos of this.datosInterests){
-                    console.log("Categoria Seleccionada--> "+datos.id);
                     if(this.info == ""){
                         this.info = datos.name;
                     }
