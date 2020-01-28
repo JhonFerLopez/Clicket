@@ -1,15 +1,15 @@
 <template>
-    <page actionBarHidden="true">        
+    <Page >        
+        <ActionBar>
+            <NavigationButton @tap="$navigateBack" android.systemIcon="ic_menu_back"/>
+            <Label text="Clicket"></Label>
+        </ActionBar>
 
-        <ListView for="item in items" @itemTap="onItemTap">
-            <v-template>
-                <StackLayout orientation="horizontal">
-                    <Label :text="item.name" textWrap="true"></Label>
-                </StackLayout>
-            </v-template>
-        </ListView>
+        <GridLayout>
+            <Label class="m-10 h3" text="Hola Mundo" verticalAlignment="top" ></Label>
+        </GridLayout>
 
-    </page>
+    </Page>
 </template>
 
 <script>

@@ -2,39 +2,55 @@
     <page>
         <ActionBar title="CLICKET">
         </ActionBar> 
-        <TabView 
-            androidTabsPosition="bottom"
-            tabTextFontSize="16"
-            tabBackgroundColor="rgba(232,232,232,1)"
-            selectedTabTextColor="rgb(0,0, 0)"
-            :selectedIndex="selectedIndex" 
-            @selectedIndexChange="indexChange">            
+        <BottomNavigation>
+            <TabStrip>
+                <TabStripItem class="navigation__item">
+                    <Label text="Home"></Label>
+                    <Image src.decode="font://&#xf015;" class="fas t-36"></Image>
+                </TabStripItem>
+                <TabStripItem class="navigation__item">
+                    <Label text="Browse"></Label>
+                    <Image src.decode="font://&#xf1ea;" class="far t-36"></Image>
+                </TabStripItem>
+                <TabStripItem class="navigation__item">
+                    <Label text="Search"></Label>
+                    <Image src.decode="font://&#xf002;" class="fas t-36"></Image>
+                </TabStripItem>                
+                <TabStripItem class="navigation__item">
+                    <Label text="Search"></Label>
+                    <Image src.decode="font://&#xf002;" class="fas t-36"></Image>
+                </TabStripItem>
+            </TabStrip>
 
-            <TabViewItem title="Tab 1" iconSource="">
+            <TabContentItem>
                 <!--componente : Recibe Propiedades -->
                 <Frame>
                     <CInterests/>
                 </Frame>
-            </TabViewItem>
-            <TabViewItem title="Tab 2">
+            </TabContentItem>
+
+            <TabContentItem>
                 <!--componente : Recibe Propiedades -->
                 <Frame>
                     <Categories />
                 </Frame>
-            </TabViewItem>
-            <TabViewItem title="Tab 3">
+            </TabContentItem>
+
+            <TabContentItem>
                 <!--componente : Recibe Propiedades -->
                 <Frame>
                     <CLabel :PText="'Texto Tab 3'" />
                 </Frame>
-            </TabViewItem>
-            <TabViewItem title="Tab 4">
+            </TabContentItem>
+            
+            <TabContentItem>
                 <!--componente : Recibe Propiedades -->
                 <Frame>
                     <User />
                 </Frame>
-            </TabViewItem>
-        </TabView>
+            </TabContentItem>
+
+        </BottomNavigation>
     </page>
 </template>
 

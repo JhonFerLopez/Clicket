@@ -1,7 +1,7 @@
 <template>
     <Page actionBarHidden="true">
         <ScrollView orientation="vertical" class="scroll-height full-width">
-            <ListView for="item in items" @itemTap="onItemTap(item)">
+            <ListView for="item in items" @itemTap="onItemTap">
                 <v-template>
                     <FlexboxLayout flexDirection="column">
                         <Label :text="item.name" textWrap="true" ></Label>
@@ -52,8 +52,24 @@
                     console.log(response.data.errors);
                 });
             },
-            onItemTap(index) {
-                goToSection(this, this.$router.subCategories, {index}, "fade", true);
+            onItemTap(args) {
+                //goToSection(this, this.$router.subCategories, {index}, "fade", true);
+                
+                const view = args.view;
+                const page = view.page;
+                const tappedItem = view.bindingContext;
+
+                this.$navigateTo(this.$router.subCategories, {
+                    props: { 
+                        context: tappedItem,
+                        animated: true,
+                        transition: {
+                            name: "slide",
+                            duration: 200,
+                            curve: "ease"
+                        }
+                    }
+                });
             }
         },
         computed : {
