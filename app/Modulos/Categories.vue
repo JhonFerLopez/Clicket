@@ -1,6 +1,6 @@
 <template>
     <Page actionBarHidden="true">
-        <ScrollView orientation="vertical" class="scroll-height full-width">
+        <!--<ScrollView orientation="vertical" class="scroll-height full-width">-->
             <ListView for="item in items" @itemTap="onItemTap">
                 <v-template>
                     <FlexboxLayout flexDirection="column">
@@ -9,7 +9,7 @@
                     </FlexboxLayout>
                 </v-template>
             </ListView>   
-        </ScrollView>
+        <!--</ScrollView>-->
     </Page>
 </template>
 
@@ -19,6 +19,7 @@
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     //Llamado a componentes
     import CLabel from './../components/CLabel';
+    import SubCategories from "./SubCategories.vue";
 
     export default {
         //Variables
@@ -36,11 +37,11 @@
         //Inicializador
         created() {
             AuthAxiosToken(axios, this);           
-            this.getInteres();
+            this.getCategories();
         },
         //Metodos de la Pagina    
         methods: { 
-            getInteres(){
+            getCategories(){
                 //Consumo de la Api
                 axios
                 .get(`${this.$store.getters.getServerPath}/auth/tags`)
@@ -52,14 +53,17 @@
                     console.log(response.data.errors);
                 });
             },
-            onItemTap(args) {
+            onItemTap(event) {
                 //goToSection(this, this.$router.subCategories, {index}, "fade", true);
-                
-                const view = args.view;
+                console.log("index "+event.index);
+                const view = event.view;
+                console.log("view "+event.view);
                 const page = view.page;
+                console.log("page "+view.page);
                 const tappedItem = view.bindingContext;
-
-                this.$navigateTo(this.$router.subCategories, {
+                console.log("tappeditem "+view.bindingContext);             
+                
+                this.$navigateTo(SubCategories, {
                     props: { 
                         context: tappedItem,
                         animated: true,

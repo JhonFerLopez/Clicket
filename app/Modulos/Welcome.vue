@@ -55,9 +55,6 @@
 </template>
 
 <script>
-    //LLamado a Axios: Conexion API a BD.
-    import axios from "axios";
-    import {AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     //Llamado a componentes
     import CInterests from './../components/CInterests';
     import CLabel from './../components/CLabel';
@@ -65,33 +62,12 @@
     import Categories from './../Modulos/Categories';
 
     export default {
-        //Variables
-        data() {
-            return {
-                buscador : "",
-                user : {
-                    name : "", 
-                    email : ""
-                }
-            };
-        },
-        //Inicializador
-        created() {
-            AuthAxiosToken(axios, this); 
-        },
         //LLamado a Componentes
         components : {
             CInterests,
             CLabel,
             User,
             Categories
-        },
-        //Metodos de la Pagina
-        methods: {
-            indexChange: function(args) {
-                let newIndex = args.value
-                console.log('Current tab index: ' + newIndex)
-            }            
         }
     }
 </script>

@@ -20,3 +20,57 @@ $color_button : rgb(253, 254, 254);
     padding: 20px;
     font-weight: bold;
 }
+
+TabStripItem.tabstripitem {
+    background-color: teal;
+}
+
+TabStripItem.tabstripitem:active {
+    background-color: yellowgreen;
+} 
+
+TabContentItem.first-tabcontent {
+    background-color: seashell;
+    color: olive;
+}
+TabContentItem.second-tabcontent {
+    background-color: #393a3b;
+    color: aquamarine;
+}
+TabContentItem.third-tabcontent {
+    background-color: blueviolet;
+    color: antiquewhite;
+}
+
+.fas {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-weight: 900;
+}
+
+.t-36 {
+    font-size: 36;
+}
+
+// Custom tabstrip item class
+.navigation__item {
+    &:active,
+    &:active Label {
+        @include colorize($color: complementary);
+    }
+}
+
+// Common page class
+.page__content {
+    &-icon,
+    &-placeholder {
+        color: const(grey);
+        font-size: 20;
+        vertical-align: center;
+    }
+
+    &-icon {
+        font-size: 72;
+        vertical-align: top;
+        margin-top: 20%;
+    }
+}

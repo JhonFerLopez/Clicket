@@ -24,6 +24,9 @@
 </template>
 
 <script>
+    //LLamado a Axios: Conexion API a BD.
+    import axios from "axios";
+    import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
 export default {
     methos :{
         goBack() {
