@@ -21,7 +21,7 @@
                 <v-template>
                     <FlexboxLayout flexDirection="column">
                         <Label :text="item.titulo" textWrap="true" ></Label>
-                        <Image src="~/assets/images/offer/turismo.png" ></Image>
+                        <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
                     </FlexboxLayout>
                 </v-template>
             </ListView>   
@@ -34,7 +34,7 @@
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     //Llamado a componentes
-    import CLabel from './CLabel';
+    import CLabel from './../components/CLabel';
 
     export default {
         //Variables
@@ -42,7 +42,9 @@
             return {
                 items : [],
                 datosInterests : [],
-                info : ""
+                info : "",
+                urlPhoto : this.$store.getters.getServerPhoto,
+                buscador : ""
             };
         },
         //Inicializador
@@ -81,7 +83,7 @@
             getInteres(){
                 //Consumo de la Api
                 axios
-                .get(`${this.$store.getters.getServerPath}/auth/posts`)
+                .get(`${this.$store.getters.getServerPath}/auth/user/posts`)
                 .then(response => {//Respuesta de la Api
                     this.items = response.data.data;    
                 })

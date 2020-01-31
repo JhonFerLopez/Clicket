@@ -25,7 +25,7 @@
             <TabContentItem>
                 <!--componente : Recibe Propiedades -->
                 <Frame>
-                    <CInterests/>
+                    <Interests/>
                 </Frame>
             </TabContentItem>
 
@@ -54,17 +54,18 @@
     </page>
 </template>
 
-<script>
-    //Llamado a componentes
-    import CInterests from './../components/CInterests';
-    import CLabel from './../components/CLabel';
+<script>        
+    //Llamado a Modulos
+    import Interests from './../Modulos/Interests';    
     import User from './../Modulos/User';
     import Categories from './../Modulos/Categories';
+    //Llamado a componentes
+    import CLabel from './../components/CLabel';
 
     export default {
         //LLamado a Componentes
         components : {
-            CInterests,
+            Interests,
             CLabel,
             User,
             Categories

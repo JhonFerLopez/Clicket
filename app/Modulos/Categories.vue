@@ -4,8 +4,8 @@
             <ListView for="item in items" @itemTap="onItemTap">
                 <v-template>
                     <FlexboxLayout flexDirection="column">
-                        <Label :text="item.name" textWrap="true" ></Label>
-                        <Image src="~/assets/images/offer/deporte.png" ></Image>
+                        <Label :text="item.id+' -- '+item.name" textWrap="true" ></Label>
+                        <Image row="2" :src="urlPhoto+'/' + item.image" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
                     </FlexboxLayout>
                 </v-template>
             </ListView>   
@@ -27,6 +27,7 @@
             return {
                 datosInterests : [],
                 info : "",
+                urlPhoto : this.$store.getters.getServerPhoto,
                 items : []
             };
         },

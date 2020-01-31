@@ -7,6 +7,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     //configuracion Api
+    serverPhoto: "http://clicket.ziel.com.co/uploads",
     server: "http://clicket.ziel.com.co/api",
     role: 'driver',
     token: '',
@@ -49,6 +50,7 @@ const store = new Vuex.Store({
   },
   // Funciones que retornan Valores/Datos de lo Componentes
   getters: {
+    getServerPhoto: state => state.serverPhoto,
     getServerPath: state => state.server,
     getToken: state => state.token,
     getLoginUser: state => state.user,

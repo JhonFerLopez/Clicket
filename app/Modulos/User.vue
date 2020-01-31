@@ -11,15 +11,16 @@
                 left="0"
             >
                 <Image src="~/assets/images/profile-icon.png"></Image> 
-                <Button
-                text="Cerrar Sesión"
-                @tap="logout"
-                id="show_bottom_drawer"
-                row="1"
-                col="0"
-                ></Button> 
+                
             </GridLayout>
         </AbsoluteLayout>
+        <Button
+            text="Cerrar Sesión"
+            @tap="logout"
+            id="show_bottom_drawer"
+            row="1"
+            col="0"
+        ></Button> 
     </page>
 </template>
 

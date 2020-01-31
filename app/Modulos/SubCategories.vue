@@ -3,20 +3,24 @@
         <ActionBar>
             <NavigationButton @tap="$navigateBack" android.systemIcon="ic_menu_back"/>
             <Label text="Clicket"></Label>
-        </ActionBar>        
-        <GridLayout>
-            <Label class="m-10 h3" :text="context.name" verticalAlignment="top" ></Label>
-        </GridLayout>
-        <GridLayout>
-            <ListView for="item in items" @itemTap="onItemTap">
-                <v-template>
-                    <FlexboxLayout flexDirection="column">
-                        <Label :text="item.name" textWrap="true" ></Label>
-                        <Image src="~/assets/images/offer/moda.png" ></Image>
-                    </FlexboxLayout>
-                </v-template>
+        </ActionBar>  
+        
+        <FlexboxLayout >            
+            <FlexboxLayout flexDirection="column" backgroundColor="#FAD7D0">
+                <Label class="m-10 h3" :text="context.name" verticalAlignment="top" ></Label>
+                <Button text="Añadir A Mis Gustos" @tap="onButtonTap" />
+            </FlexboxLayout>
+            <FlexboxLayout>
+                <ListView for="item in items" @itemTap="onItemTap">
+                    <v-template>
+                        <FlexboxLayout flexDirection="column">
+                            <Label :text="item.id+' -- '+item.name" textWrap="true" ></Label>
+                            <Image row="2" :src="urlPhoto+'/' + item.image" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
+                        </FlexboxLayout>
+                    </v-template>
             </ListView>
-        </GridLayout> 
+            </FlexboxLayout>
+        </FlexboxLayout> 
     </Page>
 </template>
 
@@ -24,12 +28,14 @@
     //LLamado a Axios: Conexion API a BD.
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
+    import ItemSubCategories from "./ItemSubCategories.vue";
     
     export default {
         props: ["context"],
         data() {
             return {
-                items : []
+                items : [],
+                urlPhoto : this.$store.getters.getServerPhoto,
             };
         },
         components : {
@@ -62,11 +68,11 @@
             },
             onItemTap (args) {
 //
-                /*const view = args.view;
+                const view = args.view;
                 const page = view.page;
                 const tappedItem = view.bindingContext;
 
-                this.$navigateTo(ItemDetails, {
+                this.$navigateTo(ItemSubCategories, {
                     props: { 
                         context: tappedItem,
                         animated: true,
@@ -74,7 +80,25 @@
                             name: "slide",
                             duration: 200,
                             curve: "ease"
-                        }}});*/
+                        }
+                    }
+                });
+            },
+            onButtonTap (event){
+                //Consumo de la Api                   
+                axios
+                .post(`${this.$store.getters.getServerPath}/auth/interest/add`, {
+                    id: this.context.id
+                },)
+                .catch(err => {//Respuesta de la Api en Caso De Error
+                    var error = true;
+                    this.processing = false;
+                    alert({
+                        title: "Error en Aplicativo",
+                        message: "No Pudo Guardar La Categoria "+datos.name,
+                        okButtonText: "ERROR"
+                    });
+                });
             }
         }
     }

@@ -52,12 +52,7 @@ TabContentItem.third-tabcontent {
 }
 
 // Custom tabstrip item class
-.navigation__item {
-    &:active,
-    &:active Label {
-        @include colorize($color: complementary);
-    }
-}
+
 
 // Common page class
 .page__content {
