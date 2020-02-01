@@ -36,6 +36,7 @@
             return {
                 items : [],
                 urlPhoto : this.$store.getters.getServerPhoto,
+                AgregarInteres : true
             };
         },
         components : {
@@ -85,17 +86,31 @@
                 });
             },
             onButtonTap (event){
-                //Consumo de la Api                   
+                //Consumo de la Api      
+                if (this.AgregarInteres){   
+                    var consume = "/auth/interest/add";
+                    var message = "No Agrego La Categoria ";
+                }else{
+                    var consume = "/auth/interest/remove";
+                    var message = "Se Quita la Cartegoria ";
+                }
                 axios
-                .post(`${this.$store.getters.getServerPath}/auth/interest/add`, {
+                .post(`${this.$store.getters.getServerPath + consume}`, {
                     id: this.context.id
                 },)
+                .then(response => {
+                    alert({
+                        title: "Error en Aplicativo",
+                        message: message + this.context.name,
+                        okButtonText: "ERROR"
+                    });
+                })
                 .catch(err => {//Respuesta de la Api en Caso De Error
                     var error = true;
                     this.processing = false;
                     alert({
                         title: "Error en Aplicativo",
-                        message: "No Pudo Guardar La Categoria "+datos.name,
+                        message: "No se Pudo Procesar la Solicitud",
                         okButtonText: "ERROR"
                     });
                 });
