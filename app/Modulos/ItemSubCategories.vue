@@ -3,20 +3,25 @@
         <ActionBar>
             <NavigationButton @tap="$navigateBack" android.systemIcon="ic_menu_back"/>
             <Label text="Clicket"></Label>
-        </ActionBar>        
-        <GridLayout>
-            <Label class="m-10 h3" :text="context.name" verticalAlignment="top" ></Label>
-        </GridLayout>
-        <GridLayout>
-            <ListView for="item in items" @itemTap="onItemTap">
-                <v-template>
-                    <FlexboxLayout flexDirection="column">
-                        <Label :text="item.id+' -- '+item.title" textWrap="true" ></Label>
-                        <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
-                    </FlexboxLayout>
-                </v-template>
-            </ListView>
-        </GridLayout> 
+        </ActionBar>
+        <FlexboxLayout >          
+            <FlexboxLayout flexDirection="column" backgroundColor="#FAD7D0">
+                <Label class="m-10 h3" :text="context.name" verticalAlignment="top" ></Label>
+                <Frame> 
+                    <CButtonInterests :PDatos="context" />
+                </Frame>
+            </FlexboxLayout>
+            <GridLayout>
+                <ListView for="item in items" >
+                    <v-template>
+                        <FlexboxLayout flexDirection="column">
+                            <Label :text="item.id+' -- '+item.title" textWrap="true" ></Label>
+                            <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
+                        </FlexboxLayout>
+                    </v-template>
+                </ListView>
+            </GridLayout> 
+        </FlexboxLayout >  
     </Page>
 </template>
 
@@ -24,6 +29,7 @@
     //LLamado a Axios: Conexion API a BD.
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
+    import CButtonInterests from './../components/CButtonInterests';
     
     export default {
         props: ["context"],
@@ -34,6 +40,7 @@
             };
         },
         components : {
+            CButtonInterests
         },
         created() {
             AuthAxiosToken(axios, this);           
@@ -59,9 +66,6 @@
                         });
                     }
                 });
-                console.log("test 1");
-            },
-            onItemTap (args) {
             }
         }
     }

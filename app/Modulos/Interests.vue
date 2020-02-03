@@ -20,8 +20,8 @@
             <ListView for="item in items" @itemTap="onItemTap">
                 <v-template>
                     <FlexboxLayout flexDirection="column">
-                        <Label :text="item.titulo" textWrap="true" ></Label>
-                        <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
+                        <Label :text="item.name" textWrap="true" ></Label>
+                        <Image row="2" :src="urlPhoto+'/' + item.image" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
                     </FlexboxLayout>
                 </v-template>
             </ListView>   
@@ -62,7 +62,7 @@
                 var acction = this.validaInteres(payload.id);
                 if(acction[0]){
                     this.datosInterests.push({
-                        id : payload.id ,  title : payload.title
+                        id : payload.id ,  title : payload.name
                     })
                 }else{
                     this.datosInterests.splice(acction[1],1);
@@ -85,7 +85,7 @@
                 axios
                 .get(`${this.$store.getters.getServerPath}/auth/user/posts`)
                 .then(response => {//Respuesta de la Api
-                    this.items = response.data.data;    
+                    this.items = response.data.interest;    
                 })
                 .catch(response => {//Respuesta de la Api en Caso De Error
                     console.log(response.data);

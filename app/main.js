@@ -2,6 +2,9 @@
 import Vue from 'nativescript-vue'
 import router from './Config/router'
 import store from './Config/store'
+import VueDevtools from 'nativescript-vue-devtools'
+
+Vue.use(VueDevtools)
 
 //Vue.registerElement("PreviousNextView", () => require("nativescript-iqkeyboardmanager"). PreviousNextView)
 

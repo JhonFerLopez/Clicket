@@ -3,12 +3,14 @@
         <ActionBar>
             <NavigationButton @tap="$navigateBack" android.systemIcon="ic_menu_back"/>
             <Label text="Clicket"></Label>
-        </ActionBar>  
+        </ActionBar> 
         
         <FlexboxLayout >            
             <FlexboxLayout flexDirection="column" backgroundColor="#FAD7D0">
                 <Label class="m-10 h3" :text="context.name" verticalAlignment="top" ></Label>
-                <Button text="Añadir A Mis Gustos" @tap="onButtonTap" />
+                <Frame> 
+                    <CButtonInterests :PDatos="context" />
+                </Frame>
             </FlexboxLayout>
             <FlexboxLayout>
                 <ListView for="item in items" @itemTap="onItemTap">
@@ -18,7 +20,7 @@
                             <Image row="2" :src="urlPhoto+'/' + item.image" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
                         </FlexboxLayout>
                     </v-template>
-            </ListView>
+                </ListView>
             </FlexboxLayout>
         </FlexboxLayout> 
     </Page>
@@ -29,17 +31,18 @@
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     import ItemSubCategories from "./ItemSubCategories.vue";
+    import CButtonInterests from './../components/CButtonInterests';
     
     export default {
         props: ["context"],
         data() {
             return {
                 items : [],
-                urlPhoto : this.$store.getters.getServerPhoto,
-                AgregarInteres : true
+                urlPhoto : this.$store.getters.getServerPhoto
             };
         },
         components : {
+            CButtonInterests
         },
         created() {
             AuthAxiosToken(axios, this);           
@@ -83,36 +86,6 @@
                             curve: "ease"
                         }
                     }
-                });
-            },
-            onButtonTap (event){
-                //Consumo de la Api      
-                if (this.AgregarInteres){   
-                    var consume = "/auth/interest/add";
-                    var message = "No Agrego La Categoria ";
-                }else{
-                    var consume = "/auth/interest/remove";
-                    var message = "Se Quita la Cartegoria ";
-                }
-                axios
-                .post(`${this.$store.getters.getServerPath + consume}`, {
-                    id: this.context.id
-                },)
-                .then(response => {
-                    alert({
-                        title: "Error en Aplicativo",
-                        message: message + this.context.name,
-                        okButtonText: "ERROR"
-                    });
-                })
-                .catch(err => {//Respuesta de la Api en Caso De Error
-                    var error = true;
-                    this.processing = false;
-                    alert({
-                        title: "Error en Aplicativo",
-                        message: "No se Pudo Procesar la Solicitud",
-                        okButtonText: "ERROR"
-                    });
                 });
             }
         }
