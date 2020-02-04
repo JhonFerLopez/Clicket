@@ -39,7 +39,7 @@
             <TabContentItem>
                 <!--componente : Recibe Propiedades -->
                 <Frame>
-                    <CLabel :PText="'Texto Tab 3'" />
+                    <Experts />
                 </Frame>
             </TabContentItem>
             
@@ -59,6 +59,7 @@
     import Interests from './../Modulos/Interests';    
     import User from './../Modulos/User';
     import Categories from './../Modulos/Categories';
+    import Experts from './../Modulos/Experts';
     //Llamado a componentes
     import CLabel from './../components/CLabel';
 
@@ -68,7 +69,8 @@
             Interests,
             CLabel,
             User,
-            Categories
+            Categories,
+            Experts
         }
     }
 </script>

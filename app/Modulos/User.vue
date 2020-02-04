@@ -1,26 +1,22 @@
 <template>
-    <page actionBarHidden="true">
-        <AbsoluteLayout width="100%" height="100%" backgroundColor="lightgray">
-            <GridLayout
-                columns="*"
-                rows="*, 50"
-                width="100%"
-                height="100%"
-                backgroundColor="lightgray"
-                top="0"
-                left="0"
-            >
-                <Image src="~/assets/images/profile-icon.png"></Image> 
-                
-            </GridLayout>
-        </AbsoluteLayout>
-        <Button
-            text="Cerrar Sesión"
-            @tap="logout"
-            id="show_bottom_drawer"
-            row="1"
-            col="0"
-        ></Button> 
+    <page actionBarHidden="true">             
+        <FlexboxLayout 
+            flexDirection="column" 
+            width="50%"            
+        >      
+            <Image row="2" :src="urlPhoto+'/' + user.image" 
+                tretch="aspectFill" height="120" 
+                class="m-r-20" loadMode="async"/> 
+            <TextField
+                class="input input-rounded"
+                hint="Nombre Completo"
+                autocorrect="false"
+                autocapitalizationType="words"
+                v-model="user.name"
+                returnKeyType="next"
+            ></TextField> 
+            <Label :text="this.user.email" textWrap="true" ></Label> 
+        </FlexboxLayout>        
     </page>
 </template>
 
@@ -28,24 +24,22 @@
     //LLamado a Axios: Conexion API a BD.
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
+
 export default {
-    methos :{
-        goBack() {
-            goToSection(this, this.$router.session, {}, "slideRight", true);
-        },
-        logout() {
-            console.log("Cierre de Session");
-            axios
-            .post(`${this.$store.getters.getServerPath}/auth/logout`)
-            .then(response => {
-                console.log("Session Terminada");
-                this.$store.dispatch("logOut");
-                goToSection(this, this.$router.login, {}, "slideRight", true);
-            })
-            .catch(response => {
-                console.log(response.data.errors);
-            });
-        }
+    //Variables
+    data() {
+        return { 
+            urlPhoto : this.$store.getters.getServerPhoto,
+            user: {
+                name: this.$store.getters.getLoginUser.name,
+                last_name: this.$store.getters.getLoginUser.last_name,
+                email: this.$store.getters.getLoginUser.email,
+                password: "",
+                image:""
+            }           
+        };
+    },
+    methos: {
     }
 }
 </script>

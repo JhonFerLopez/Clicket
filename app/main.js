@@ -3,8 +3,10 @@ import Vue from 'nativescript-vue'
 import router from './Config/router'
 import store from './Config/store'
 import VueDevtools from 'nativescript-vue-devtools'
+import RadListView from 'nativescript-ui-listview/vue';
 
 Vue.use(VueDevtools)
+Vue.use(RadListView);
 
 //Vue.registerElement("PreviousNextView", () => require("nativescript-iqkeyboardmanager"). PreviousNextView)
 

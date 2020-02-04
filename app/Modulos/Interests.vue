@@ -20,8 +20,7 @@
             <ListView for="item in items" @itemTap="onItemTap">
                 <v-template>
                     <FlexboxLayout flexDirection="column">
-                        <Label :text="item.name" textWrap="true" ></Label>
-                        <Image row="2" :src="urlPhoto+'/' + item.image" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
+                        <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
                     </FlexboxLayout>
                 </v-template>
             </ListView>   
@@ -35,14 +34,13 @@
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     //Llamado a componentes
     import CLabel from './../components/CLabel';
+    import SinglePost from "./SinglePost.vue";
 
     export default {
         //Variables
         data() {
             return {
                 items : [],
-                datosInterests : [],
-                info : "",
                 urlPhoto : this.$store.getters.getServerPhoto,
                 buscador : ""
             };
@@ -58,34 +56,29 @@
         },
         //Metodos de la Pagina
         methods: {            
-            onItemTap(payload) {
-                var acction = this.validaInteres(payload.id);
-                if(acction[0]){
-                    this.datosInterests.push({
-                        id : payload.id ,  title : payload.name
-                    })
-                }else{
-                    this.datosInterests.splice(acction[1],1);
-                }                
-            },
-            validaInteres(index) { //Validacion de datos Repetidos 
-                let adicionar = [true, 0] ;
-                var i = 0 ;
-                for(const datos of this.datosInterests){
-                    if(datos.id == index){
-                        adicionar[0] = false;
-                        adicionar[1] = i;
+            onItemTap(event) {  
+                const view = event.view;
+                const page = view.page;
+                const tappedItem = view.bindingContext;
+                
+                this.$navigateTo(SinglePost, {
+                    props: { 
+                        context: tappedItem,
+                        animated: true,
+                        transition: {
+                            name: "slide",
+                            duration: 200,
+                            curve: "ease"
+                        }
                     }
-                    i++;
-                }
-                return adicionar;
-            },            
+                });              
+            },           
             getInteres(){
                 //Consumo de la Api
                 axios
                 .get(`${this.$store.getters.getServerPath}/auth/user/posts`)
                 .then(response => {//Respuesta de la Api
-                    this.items = response.data.interest;    
+                    this.items = response.data.data;    
                 })
                 .catch(response => {//Respuesta de la Api en Caso De Error
                     console.log(response.data);
@@ -94,21 +87,6 @@
             },
             submit(){
 
-            }
-        },
-        //Metodos de Ejecuciones Automaticas y Constante.
-        computed : {
-            CategoriaSeleccionada(){
-                this.info = "";
-                for(const datos of this.datosInterests){
-                    if(this.info == ""){
-                        this.info = datos.title;
-                    }
-                    else{
-                        this.info = this.info + ", " + datos.title;
-                    }
-                }
-                return this.info;
             }
         }
     }
