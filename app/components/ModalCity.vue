@@ -21,13 +21,13 @@
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
 
     export default {
-
+        
         data() {
             return {
                 itemList : [{
                         id: 0,
-                        name: "Seleccione Categorias"
-                    }]
+                        name: "Seleccione Ciudad"
+                    }] 
             };
         },
         created() {
@@ -44,9 +44,9 @@
             getCategories(){
                 //Consumo de la Api
                  axios
-                .get(`${this.$store.getters.getServerPath}/auth/expertstags`)
+                .get(`${this.$store.getters.getServerPath}/auth/countries`)
                 .then(response => {
-                    this.itemList = this.itemList.concat(response.data.data);  
+                    this.itemList = this.itemList.concat(response.data.data[0].cities); 
                 })
                 .catch(response => {
                     console.log(response.data);
