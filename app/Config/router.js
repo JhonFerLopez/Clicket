@@ -2,13 +2,10 @@
 import App from '~/Modulos/Login/Login.vue' // Rutas Incio de Aplicativo
 import Session from "~/Modulos/Login/Session.vue";
 import Register from "~/Modulos/Login/Register.vue";
+import Category from "~/Modulos/Login/Category.vue";
 
 //importacion de Librerias Modulos
 import Welcome from "~/Modulos/Welcome.vue";
-import Category from "~/Modulos/Category.vue";
-import Categories from "~/Modulos/Categories.vue";
-import SubCategories from "~/Modulos/SubCategories.vue";
-
 
 //Declaracion de Rutas con variables 
 const routes = {
@@ -17,8 +14,7 @@ const routes = {
     register : Register,
     welcome : Welcome,
     category : Category,
-    categories : Categories,
-    subCategories : SubCategories,
+    
     testeo : function(str) {
         console.log("Testeo Router "+str);
     }

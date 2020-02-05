@@ -23,28 +23,28 @@
             </TabStrip>
 
             <TabContentItem>
-                <!--componente : Recibe Propiedades -->
+                <!--TapInterests : Recibe Propiedades -->
                 <Frame>
                     <Interests/>
                 </Frame>
             </TabContentItem>
 
             <TabContentItem>
-                <!--componente : Recibe Propiedades -->
+                <!--TapCategories : Recibe Propiedades -->
                 <Frame>
                     <Categories />
                 </Frame>
             </TabContentItem>
 
             <TabContentItem>
-                <!--componente : Recibe Propiedades -->
+                <!--TapExperts : Recibe Propiedades -->
                 <Frame>
                     <Experts />
                 </Frame>
             </TabContentItem>
             
             <TabContentItem>
-                <!--componente : Recibe Propiedades -->
+                <!--TapProfiles : Recibe Propiedades -->
                 <Frame>
                     <User />
                 </Frame>
@@ -56,10 +56,11 @@
 
 <script>        
     //Llamado a Modulos
-    import Interests from './../Modulos/Interests';    
-    import User from './../Modulos/User';
-    import Categories from './../Modulos/Categories';
-    import Experts from './../Modulos/Experts';
+    import Interests from './../Modulos/TapInterests/Interests';    
+    import Categories from './../Modulos/TapCategories/Categories';
+    import Experts from './../Modulos/TapExperts/Experts';
+    import User from './../Modulos/TapProfiles/User';   
+    
     //Llamado a componentes
     import CLabel from './../components/CLabel';
 

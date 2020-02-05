@@ -55,9 +55,10 @@
 <script>
     //LLamado a Axios: Conexion API a BD.   
     import axios from "axios";
-    import { AuthAxiosToken, goToSection , isEmpty} from "~/../app/helpers/index.js";//Ayudas
+    import { AuthAxiosToken, goToSection , isEmpty} from "~/../app/helpers/index.js";//Utilidades
 
     export default {
+        //Variables
         data() {
             return {
                 selectedIndex: 0,
@@ -71,18 +72,12 @@
                 }
             };
         },
-        created() {//Inicializador
+        //Inicializador
+        created() {
             AuthAxiosToken(axios, this);
         },
-        computed: {
-            message() {
-                return this.$store.getters.getMessage;
-            },
-            errors() {
-                return errors;
-            }
-        },
-        methods: {//Metodos de la Pagina
+        //Metodos de la Pagina
+        methods: {
             goBack() {//Regresar
                 goToSection(this, this.$router.login, {}, "slideRight", true);
             },focusLastName() {//Nombre Completo
@@ -91,7 +86,7 @@
             focusRePassword() {//Contraseña
                 this.$refs.repassword.nativeView.focus();
             },
-            registerUser() {
+            registerUser() {//Registro de Usuario 
                 //Validaciones
                 if (isEmpty(this.user)) {
                     alert({
@@ -107,6 +102,7 @@
                             okButtonText: "OK"
                         });
                     } else {
+                        //Llamado al Api de Registro
                        axios
                         .post(`${this.$store.getters.getServerPath}/auth/signup`, {
                             name: this.user.name,

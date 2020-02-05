@@ -23,6 +23,7 @@
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     
     export default {
+        //Variables recibidas de la interfaz que la invoca 
         props: ["context"],
         //Variables
         data() {

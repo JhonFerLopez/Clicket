@@ -33,7 +33,7 @@
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     //Llamado a componentes
-    import CLabel from './../components/CLabel';
+    import CLabel from './../../components/CLabel';
     import SinglePost from "./SinglePost.vue";
 
     export default {

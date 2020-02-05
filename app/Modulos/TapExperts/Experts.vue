@@ -23,12 +23,15 @@
     //LLamado a Axios: Conexion API a BD.
     import axios from "axios";
     import { AuthAxiosToken, goToSection, isEmpty } from "~/../app/helpers/index.js";
-    import ModalCategories from './../components/ModalCategories'
-    import ModalCity from './../components/ModalCity'
+    //LLamado a Componentes
+    import ModalCategories from './../../components/ModalCategories'
+    import ModalCity from './../../components/ModalCity'
+    import ExpertProfile from "./ExpertProfile.vue";
     
     import { ObservableArray, ChangedData } from "tns-core-modules/data/observable-array";
     
     export default {
+        //Variables
         data() {
             return {
                 itemList: [],
@@ -44,10 +47,12 @@
                 condicion: ""
             };
         },
+        //Inicializador
         created() {
             AuthAxiosToken(axios, this);           
             this.getExperts();            
         },
+        //Metodos de la Pagina 
         methods: {
             //LLamado al Modal de Categorias
             showCategoriesPageModally() {
@@ -58,6 +63,7 @@
                     this.getExperts();
                 });
             },
+            //LLamado al Modal de Ciudades
             showCityPageModally() {
                 this.$showModal(ModalCity)
                 .then(response => {
@@ -88,7 +94,26 @@
                     console.log(response.data.errors);
                 });
             },
-            onItemTap(){
+            onItemTap(event){
+                const view = event.view;
+                const page = view.page;
+                const tappedItem = view.bindingContext;
+
+                goToSection(this, ExpertProfile, {tappedItem}, "slide", true);
+                
+                /*
+                this.$navigateTo(ExpertProfile, {
+                    props: { 
+                        context: tappedItem,
+                        animated: true,
+                        transition: {
+                            name: "slide",
+                            duration: 200,
+                            curve: "ease"
+                        }
+                    }
+                });
+                */
 
             }
         }

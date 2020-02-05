@@ -54,9 +54,9 @@
 <script>
     //LLamado a Axios: Conexion API a BD.
     import axios from "axios";
-    import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
+    import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";//Utilidades
     //Llamado a componentes
-    import CLabel from './../components/CLabel';
+    import CLabel from './../../components/CLabel';
 
     export default {
         //Variables
@@ -76,11 +76,12 @@
             AuthAxiosToken(axios, this);           
             this.getInteres();
         },
-        methods: {//Metodos de la Pagina
+        //Metodos de la Pagina
+        methods: {
             goBack() {
                 goToSection(this, this.$router.welcome, {}, "slideRight", true);
             },
-            showOffer(payload) {
+            showOffer(payload) {//Metodo para Agregar o quitar Valores de un Array Object
                 var acction = this.validaInteres(payload.id);
                 if(acction[0]){
                     this.datosInterests.push({
@@ -89,7 +90,6 @@
                 }else{
                     this.datosInterests.splice(acction[1],1);
                 }                
-                //goToSection(this, this.$routes.item, properties, "fade", false);
             },
             validaInteres(index) {//Validacion de Selecciones Repetidas.
                 let adicionar = [true, 0] ;
@@ -103,7 +103,7 @@
                 }
                 return adicionar;
             },            
-            getInteres(){
+            getInteres(){//Metodo que Consulta de Todas las Categorias
                 axios
                 .get(`${this.$store.getters.getServerPath}/auth/tags`)
                 .then(response => {
@@ -114,7 +114,7 @@
                     console.log(response.data.errors);
                 });
             },
-            save() {
+            save() {//Metodo para Registrar Categoria a mi interes
                 var error = false;
                 for(const datos of this.datosInterests){ 
                     //Consumo de la Api                   
