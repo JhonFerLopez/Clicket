@@ -1,9 +1,9 @@
 <template>
-    <page > 
+    <page >
         <ActionBar>
             <NavigationButton @tap="$navigateBack" android.systemIcon="ic_menu_back"/>
-            <Label text="Clicketttt"></Label>
-        </ActionBar>            
+            <Label text="Clicket"></Label>
+        </ActionBar>     
         <FlexboxLayout 
             flexDirection="column" 
             width="50%"            
@@ -11,18 +11,12 @@
             <Image row="2" :src="urlPhoto+'/' + expert.picture" 
                 tretch="aspectFill" height="120" 
                 class="m-r-20" loadMode="async"/> 
-            <TextField
-                class="input input-rounded"
-                hint="Nombre Completo"
-                autocorrect="false"
-                autocapitalizationType="words"
-                v-model="expert.name"
-                returnKeyType="next"
-            ></TextField> 
-            <Label :text="this.expert.description" textWrap="true" ></Label> 
-        </FlexboxLayout>        
+            <Label :text="expert.name" textWrap="true" ></Label> 
+            <Label :text="expert.description" textWrap="true" ></Label> 
+        </FlexboxLayout>
     </page>
 </template>
+
 
 <script>
     //LLamado a Axios: Conexion API a BD.
@@ -35,7 +29,7 @@ export default {
     data() {
         return { 
             urlPhoto : this.$store.getters.getServerPhoto,
-            expert: []         
+            expert: {}         
         };
     },
     //Inicializador
@@ -44,8 +38,9 @@ export default {
         this.getExpert();            
     },
     //Metodos de la Pagina  
-    methos: {
+    methods: {
         getExpert(){
+            console.log("id Experto "+this.context.id);
             axios
             .get(`${this.$store.getters.getServerPath}/auth/expert?id=`+this.context.id)
             .then(response => {

@@ -99,9 +99,9 @@
                 const page = view.page;
                 const tappedItem = view.bindingContext;
 
-                goToSection(this, ExpertProfile, {tappedItem}, "slide", true);
+                //goToSection(this, ExpertProfile, {tappedItem}, "slide", true);
                 
-                /*
+                
                 this.$navigateTo(ExpertProfile, {
                     props: { 
                         context: tappedItem,
@@ -113,7 +113,7 @@
                         }
                     }
                 });
-                */
+                
 
             }
         }

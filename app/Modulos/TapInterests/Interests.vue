@@ -1,30 +1,28 @@
 <template>
     <page actionBarHidden="true">    
-        <FlexboxLayout 
-            flexDirection="column" 
-            width="50%"            
-        >          
+        <FlexboxLayout flexDirection="column" height="100%" backgroundColor="#3c495e">        
             <TextField
                 class="input-login"
-                hint="buscador"
+                hint="Buscar algún tema"
                 autocorrect="false"
                 autocapitalizationType="none"
                 v-model="buscador"
                 returnKeyType="next"
                 @returnPress="submit"
+                height="7%"
             ></TextField>
-
-        </FlexboxLayout>
-
-        <ScrollView orientation="vertical" class="scroll-height full-width">
-            <ListView for="item in items" @itemTap="onItemTap">
-                <v-template>
-                    <FlexboxLayout flexDirection="column">
-                        <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
-                    </FlexboxLayout>
-                </v-template>
-            </ListView>   
-        </ScrollView>
+            
+            <FlexboxLayout flexDirection="column" height="86%" backgroundColor="red">
+                <ListView for="item in items" @itemTap="onItemTap">
+                    <v-template>
+                        <FlexboxLayout flexDirection="column">
+                            <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
+                        </FlexboxLayout>
+                    </v-template>
+                </ListView>                     
+            </FlexboxLayout>
+            <Button :text="'Ver Mas ++'" height="7%" />
+        </FlexboxLayout>        
     </page>
 </template>
 

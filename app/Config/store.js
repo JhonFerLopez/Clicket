@@ -11,6 +11,11 @@ const store = new Vuex.Store({
     server: "http://clicket.ziel.com.co/api",
     role: 'driver',
     token: '',
+    InterestPage: {
+      paginationInterets: [],
+      numPagInt: 1,
+      totNumPagInt: 0,
+    },
     //Variables Globales
     user: {
       name: 'Andres',
@@ -32,6 +37,21 @@ const store = new Vuex.Store({
         email: payload
       }
     },
+    ADD_PAGINATION_INTERETS: (state, payload) => {
+      state.InterestPage = {
+        paginationInterets: payload
+      }
+    },
+    ADD_NUM_PAG_INT: (state, payload) => {
+      state.InterestPage = {
+        numPagInt: payload
+      }
+    },
+    ADD_TOT_NUM_PAG_INT: (state, payload) => {
+      state.InterestPage = {
+        totNumPagInt: payload
+      }
+    },
   },
   //Funciones De Cambio de Valores del Componente
   actions: {
@@ -44,6 +64,15 @@ const store = new Vuex.Store({
     addUserEmail: (context, payload) => {
       context.commit('ADD_USER_EMAIL', payload)
     },
+    addPaginationInterets: (context, payload) => {
+      context.commit('ADD_PAGINATION_INTERETS', payload)
+    },
+    addNumPagInt: (context, payload) => {
+      context.commit('ADD_NUM_PAG_INT', payload)
+    },
+    addTotNumPagInt: (context, payload) => {
+      context.commit('ADD_TOT_NUM_PAG_INT', payload)
+    },
     logOut: (context) => {
       context.commit('LOG_OUT')
     }
@@ -55,16 +84,8 @@ const store = new Vuex.Store({
     getToken: state => state.token,
     getLoginUser: state => state.user,
     getRole: state => state.role,
+    getInterestPage: state => state.InterestPage,
     isLogged: state => state.logged
-    /*
-    getTransport: state => state.transport,
-    isWatingForService: state => state.watingForService,
-    isAsignedForService: state => state.asignedForService,
-    isLogged: state => state.logged,
-    getService: state => state.service,
-    getPotentialService: state => state.potential_service,
-    getNewService: state=> state.newService
-    */
   }
 }); 
 
