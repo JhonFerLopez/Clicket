@@ -1,26 +1,51 @@
 //Variables de colores Estandar
-$background_button: rgb(195, 155, 211);
+
+
+$background_button: rgb(140, 112, 251);
 $color_button : rgb(253, 254, 254);
+
+.input-login{
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    /* Color 3 */
+    background: #F2F2F2;
+    border-radius: 30px;
+}
 
 .btn-button{
     background: $background_button;
     color: $color_button;
-    border-radius: 10;
-    font-size: 16;
-    height: 45;
-    margin: 10%;
+    border-radius: 30px;
+    font-size: 26;
     padding: 10%;
-    margin-bottom: 5%;
-    width: 90%;
+    margin-bottom: 2%;
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: bold;
+    text-transform: capitalize;
+    text-align: center;
 }
 
 .text{
-    font-size: 200%;
-    color : black;
-    padding: 20px;
-    font-weight: bold;
+    position: absolute;
+    width: 290px;
+    height: 42px;
+    left: 60px;
+    top: 630px;
+    color: #000000;
+    /* Texto */
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;    
 }
 
+/*
 TabStripItem.tabstripitem {
     background-color: teal;
 }
@@ -69,3 +94,4 @@ TabContentItem.third-tabcontent {
         margin-top: 20%;
     }
 }
+*/

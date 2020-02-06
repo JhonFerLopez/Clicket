@@ -29,11 +29,12 @@ export function AuthAxiosToken(axios, context) {
 export function LogOut(axios, context, route) {
   axios.post(`${context.$store.getters.getServerPath}/auth/logout`)
     .then( () => {
+      console.log("Antes logOut "+context.$store.getters.isLogged);
       context.$store.dispatch("logOut");
+      console.log("Despues logOut "+context.$store.getters.isLogged);
       goToSection(context, route, {}, "fade", true);
     })
     .catch(err => console.log(err))
-
 };
 
 //Metodo para verificacion de Objetos

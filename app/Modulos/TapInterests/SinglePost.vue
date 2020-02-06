@@ -1,7 +1,7 @@
 <template>
     <page >
         <ActionBar>
-            <NavigationButton @tap="$navigateBack" android.systemIcon="ic_menu_back"/>
+            <NavigationButton @tap="navigateBack" android.systemIcon="ic_menu_back"/>
             <Label text="Clicket"></Label>
         </ActionBar>     
         <FlexboxLayout 
@@ -41,15 +41,20 @@
         methods: {           
             getDataSinglePost(){
                 //Consumo de la Api
+                console.log("Id Single Post "+this.context.id);
                 axios
                 .get(`${this.$store.getters.getServerPath}/auth/post?id=`+this.context.id)
                 .then(response => {//Respuesta de la Api
-                    this.datos = response.data.data;    
+                    this.datos = response.data.data; 
+                    console.log("--> "+this.datos.id);   
                 })
                 .catch(response => {//Respuesta de la Api en Caso De Error
                     console.log(response.data);
                     console.log(response.data.errors);
                 });
+            },
+            navigateBack(){
+                goToSection(this, this.$router.welcome, {}, "slideRight", true);
             }
         }
     }

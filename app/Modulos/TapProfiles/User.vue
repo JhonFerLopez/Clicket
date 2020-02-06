@@ -16,6 +16,7 @@
                 returnKeyType="next"
             ></TextField> 
             <Label :text="this.user.email" textWrap="true" ></Label> 
+            <Button :text="'Cerrar Sesión'" height="7%" @tap="getLogout"/> 
         </FlexboxLayout>        
     </page>
 </template>
@@ -23,7 +24,7 @@
 <script>
     //LLamado a Axios: Conexion API a BD.
     import axios from "axios";
-    import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
+    import { AuthAxiosToken, goToSection, LogOut} from "~/../app/helpers/index.js";
 
 export default {
     //Variables
@@ -39,7 +40,11 @@ export default {
             }           
         };
     },
-    methos: {
+    methods: {
+        getLogout(){
+            console.log("Peticion de Cierre");
+            LogOut(axios, this, this.$router.login);
+        }
     }
 }
 </script>

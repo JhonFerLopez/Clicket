@@ -1,41 +1,42 @@
 <template>
-  <Page actionBarHidden="true" xmlns:IQKeyboardManager="nativescript-iqkeyboardmanager">
+  <Page actionBarHidden="true" >
     <FlexboxLayout
-      class="gradient"
       flexDirection="column"
-      justifyContent="space-between"
-      alignItems="center"
+      backgroundColor="red"
+      width="100%" 
+      height="100%"
     >
-      <Image class="logo-login" src="https://i0.wp.com/elpuntocristiano.org/wp-content/uploads/2015/10/reino.png?w=800"></Image>
-     
-        <StackLayout class="login-form">
-          <StackLayout class="input-field">
-            <TextField
-              class="input-login"
-              hint="Correo electrónico"
-              :isEnabled="!processing"
-              keyboardType="email"
-              autocorrect="false"
-              autocapitalizationType="none"
-              v-model="user.email"
-              returnKeyType="next"
-              @returnPress="submit"
-            ></TextField>
-          </StackLayout>
-          <Button
-            hint="button"
-            text="Continuar"
-            @tap="submit"
-            :isEnabled="!processing"
-            class="btn-button"
-          ></Button>
-
-          <!--componente : Recibe Propiedades -->
-          <Frame>
-            <CLabel :PText="user.email" />
-          </Frame>
-          
-        </StackLayout>
+      <Image class="logo-login" 
+        backgroundColor="green" 
+        with="100%" 
+        height="70%" 
+        src="~/assets/images/Clicket.png">
+      </Image> 
+      <TextField
+        class="input-login"
+        hint="Introduce tu email"
+        :isEnabled="!processing"
+        keyboardType="email"
+        autocorrect="false"
+        autocapitalizationType="none"
+        v-model="user.email"
+        returnKeyType="next"
+        @returnPress="submit"
+        height="10%"
+        width="10%"
+      ></TextField>
+      <Button
+        text="Continuar"
+        @tap="submit"
+        :isEnabled="!processing"
+        class="btn-button"
+        height="10%"
+        width="10%"
+      ></Button>
+      <label text="Al continuar, aceptas las condiciones del Servicio." 
+        class="text" 
+        height="10%"
+        width="10%"/>
     </FlexboxLayout>
   </Page>
 </template>

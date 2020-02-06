@@ -1,7 +1,7 @@
 <template>
     <Page >        
         <ActionBar>
-            <NavigationButton @tap="$navigateBack" android.systemIcon="ic_menu_back"/>
+            <NavigationButton @tap="navigateBack" android.systemIcon="ic_menu_back"/>
             <Label text="Clicket"></Label>
         </ActionBar> 
         
@@ -87,6 +87,9 @@
                         }
                     }
                 });
+            },            
+            navigateBack(){
+                goToSection(this, this.$router.welcome, {}, "slideRight", true);
             }
         }
     }

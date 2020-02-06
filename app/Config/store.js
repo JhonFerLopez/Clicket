@@ -11,17 +11,13 @@ const store = new Vuex.Store({
     server: "http://clicket.ziel.com.co/api",
     role: 'driver',
     token: '',
-    InterestPage: {
-      paginationInterets: [],
-      numPagInt: 1,
-      totNumPagInt: 0,
-    },
     //Variables Globales
     user: {
-      name: 'Andres',
-      last_name: 'Arcila',
-      email: 'andres.arcila@ziel.com.co',
-    }
+      name: '',
+      last_name: '',
+      email: '',
+    },
+    logged: false,
   },
   //Funciones de Cambio de Estado
   mutations: { 
@@ -37,11 +33,8 @@ const store = new Vuex.Store({
         email: payload
       }
     },
-    ADD_INTERETS_PAGE: (state, payload) => {
-      console.log("payload "+payload.paginationInterets);
-      console.log("payload "+payload.numPagInt);
-      console.log("payload "+payload.totNumPagInt);
-      state.InterestPage = payload
+    LOG_OUT: (state) => {
+        state.logged = false
     },
   },
   //Funciones De Cambio de Valores del Componente
@@ -55,9 +48,6 @@ const store = new Vuex.Store({
     addUserEmail: (context, payload) => {
       context.commit('ADD_USER_EMAIL', payload)
     },
-    addInteretsPagination: (context, payload) => {
-      context.commit('ADD_INTERETS_PAGE', payload)
-    },
     logOut: (context) => {
       context.commit('LOG_OUT')
     }
@@ -69,7 +59,6 @@ const store = new Vuex.Store({
     getToken: state => state.token,
     getLoginUser: state => state.user,
     getRole: state => state.role,
-    getInterestPage: state => state.InterestPage,
     isLogged: state => state.logged
   }
 }); 
