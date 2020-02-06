@@ -37,20 +37,11 @@ const store = new Vuex.Store({
         email: payload
       }
     },
-    ADD_PAGINATION_INTERETS: (state, payload) => {
-      state.InterestPage = {
-        paginationInterets: payload
-      }
-    },
-    ADD_NUM_PAG_INT: (state, payload) => {
-      state.InterestPage = {
-        numPagInt: payload
-      }
-    },
-    ADD_TOT_NUM_PAG_INT: (state, payload) => {
-      state.InterestPage = {
-        totNumPagInt: payload
-      }
+    ADD_INTERETS_PAGE: (state, payload) => {
+      console.log("payload "+payload.paginationInterets);
+      console.log("payload "+payload.numPagInt);
+      console.log("payload "+payload.totNumPagInt);
+      state.InterestPage = payload
     },
   },
   //Funciones De Cambio de Valores del Componente
@@ -64,14 +55,8 @@ const store = new Vuex.Store({
     addUserEmail: (context, payload) => {
       context.commit('ADD_USER_EMAIL', payload)
     },
-    addPaginationInterets: (context, payload) => {
-      context.commit('ADD_PAGINATION_INTERETS', payload)
-    },
-    addNumPagInt: (context, payload) => {
-      context.commit('ADD_NUM_PAG_INT', payload)
-    },
-    addTotNumPagInt: (context, payload) => {
-      context.commit('ADD_TOT_NUM_PAG_INT', payload)
+    addInteretsPagination: (context, payload) => {
+      context.commit('ADD_INTERETS_PAGE', payload)
     },
     logOut: (context) => {
       context.commit('LOG_OUT')

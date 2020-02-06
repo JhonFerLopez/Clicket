@@ -21,7 +21,9 @@
                     </v-template>
                 </ListView>                     
             </FlexboxLayout>
-            <Button :text="'Ver Mas ++'" height="7%" />
+            <Button :text="'Ver Mas ++'" height="7%" 
+                :isEnabled="!processing" 
+                @tap="getInteres"/>
         </FlexboxLayout>        
     </page>
 </template>
@@ -40,7 +42,21 @@
             return {
                 items : [],
                 urlPhoto : this.$store.getters.getServerPhoto,
-                buscador : ""
+                buscador : "",
+                processing: false,
+                InterestPage: {
+                    paginationInterets: [
+                        this.$store.getters.getInterestPage
+                        ? this.$store.getters.getInterestPage.paginationInterets
+                        : ""
+                    ],
+                    numPagInt: this.$store.getters.getInterestPage.numPagInt > 0 
+                        ? this.$store.getters.getInterestPage.numPagInt
+                        : 1,
+                    totNumPagInt: this.$store.getters.getInterestPage.totNumPagInt > 0
+                        ? this.$store.getters.getInterestPage.totNumPagInt
+                        : 0,
+                }
             };
         },
         //Inicializador
@@ -73,15 +89,33 @@
             },           
             getInteres(){
                 //Consumo de la Api
+                console.log("Antes Pagina Numero "+this.InterestPage.numPagInt);
+                console.log("Antes Total Paginas "+this.InterestPage.totNumPagInt);
                 axios
-                .get(`${this.$store.getters.getServerPath}/auth/user/posts`)
-                .then(response => {//Respuesta de la Api
-                    this.items = response.data.data;    
+                .get(`${this.$store.getters.getServerPath}/auth/user/posts?page=`+this.InterestPage.numPagInt)
+                .then(response => {//Respuesta de la Api 
+                    console.log("from Pagina from "+response.data.pagination.from);
+                    console.log("Antes Pagina Numero "+this.InterestPage.numPagInt);
+                    console.log("Antes Total Paginas "+this.InterestPage.totNumPagInt);                    
+                    console.log("Data Pagina Numero "+response.data.pagination.current_page);
+                    console.log("Data Total Paginas "+response.data.pagination.total);
+                    this.InterestPage.paginationInterets = this.InterestPage.paginationInterets.concat(response.data.pagination.data);
+                    this.InterestPage.numPagInt = response.data.pagination.current_page+1;
+                    this.InterestPage.totNumPagInt = response.data.pagination.total;
+                    this.$store.dispatch("addInteretsPagination",this.InterestPage);
+
+                    
+                    this.items = this.$store.getters.getInterestPage.paginationInterets;
+                    console.log("Despues Pagina Numero "+this.$store.getters.getInterestPage.numPagInt);
+                    console.log("Despues Total Paginas "+this.$store.getters.getInterestPage.totNumPagInt);
                 })
                 .catch(response => {//Respuesta de la Api en Caso De Error
                     console.log(response.data);
                     console.log(response.data.errors);
                 });
+            },
+            Pagination(){
+
             },
             submit(){
 
