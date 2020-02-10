@@ -1,43 +1,34 @@
 <template>
   <Page actionBarHidden="true" >
-    <FlexboxLayout
-      flexDirection="column"
-      backgroundColor="red"
-      width="100%" 
-      height="100%"
-    >
-      <Image class="logo-login" 
-        backgroundColor="green" 
-        with="100%" 
-        height="70%" 
-        src="~/assets/images/Clicket.png">
-      </Image> 
-      <TextField
-        class="input-login"
-        hint="Introduce tu email"
-        :isEnabled="!processing"
-        keyboardType="email"
-        autocorrect="false"
-        autocapitalizationType="none"
-        v-model="user.email"
-        returnKeyType="next"
-        @returnPress="submit"
-        height="10%"
-        width="10%"
-      ></TextField>
-      <Button
-        text="Continuar"
-        @tap="submit"
-        :isEnabled="!processing"
-        class="btn-button"
-        height="10%"
-        width="10%"
-      ></Button>
-      <label text="Al continuar, aceptas las condiciones del Servicio." 
-        class="text" 
-        height="10%"
-        width="10%"/>
-    </FlexboxLayout>
+    <StackLayout class="form" width="100%" height="100%">
+      <StackLayout height="70%">
+        <Image src="~/assets/images/Clicket.png"></Image> 
+      </StackLayout>
+      <StackLayout class="input-field" height="10%">
+        <TextField
+          class="input"
+          hint="Introduce tu email"
+          :isEnabled="!processing"
+          keyboardType="email"
+          autocorrect="false"
+          autocapitalizationType="none"
+          v-model="user.email"
+          returnKeyType="next"
+          @returnPress="submit"
+        ></TextField>
+      </StackLayout>
+      <StackLayout class="btn-button" height="10%">
+        <Button
+          text="Continuar"
+          @tap="submit"
+          :isEnabled="!processing"
+          class="btn btn-primary"
+        ></Button>
+      </StackLayout>
+      <StackLayout height="10%">
+        <label class="text-field" text="Al continuar, aceptas las condiciones del Servicio."/>
+      </StackLayout>
+    </StackLayout>
   </Page>
 </template>
 

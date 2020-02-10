@@ -1,97 +1,45 @@
 //Variables de colores Estandar
-
+//@import '~@nativescript/theme/css/core.css';
+//@import '~@nativescript/theme/css/default.css';
 
 $background_button: rgb(140, 112, 251);
 $color_button : rgb(253, 254, 254);
 
-.input-login{
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    /* Color 3 */
-    background: #F2F2F2;
-    border-radius: 30px;
+.page {
+    align-items: center;
+    flex-direction: column;
+}
+.form {
+    margin-left: 0;
+    margin-right: 0;
+    flex-grow: 2;
+    vertical-align: middle;
+}
+
+.input{
+    font-size: 17;
 }
 
 .btn-button{
+    padding: 5%;
+}
+
+.input-field{
+    padding: 5%;
+}
+
+.btn{
     background: $background_button;
     color: $color_button;
     border-radius: 30px;
-    font-size: 26;
-    padding: 10%;
-    margin-bottom: 2%;
-    font-family: Roboto Condensed;
-    font-style: normal;
+    font-size: 24;
     font-weight: bold;
     text-transform: capitalize;
+}
+
+.text-field{
+    font-size: 14; 
+    text-transform: capitalize;
+    padding: 12%;
     text-align: center;
 }
-
-.text{
-    position: absolute;
-    width: 290px;
-    height: 42px;
-    left: 60px;
-    top: 630px;
-    color: #000000;
-    /* Texto */
-    font-family: Roboto Condensed;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
-    text-align: center;    
-}
-
-/*
-TabStripItem.tabstripitem {
-    background-color: teal;
-}
-
-TabStripItem.tabstripitem:active {
-    background-color: yellowgreen;
-} 
-
-TabContentItem.first-tabcontent {
-    background-color: seashell;
-    color: olive;
-}
-TabContentItem.second-tabcontent {
-    background-color: #393a3b;
-    color: aquamarine;
-}
-TabContentItem.third-tabcontent {
-    background-color: blueviolet;
-    color: antiquewhite;
-}
-
-.fas {
-    font-family: "Font Awesome 5 Free", "fa-solid-900";
-    font-weight: 900;
-}
-
-.t-36 {
-    font-size: 36;
-}
-
-// Custom tabstrip item class
-
-
-// Common page class
-.page__content {
-    &-icon,
-    &-placeholder {
-        color: const(grey);
-        font-size: 20;
-        vertical-align: center;
-    }
-
-    &-icon {
-        font-size: 72;
-        vertical-align: top;
-        margin-top: 20%;
-    }
-}
-*/

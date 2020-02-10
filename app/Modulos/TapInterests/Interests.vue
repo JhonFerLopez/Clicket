@@ -80,13 +80,17 @@
                 //Consumo de la Api
                 if(!this.processing){
                     console.log("Consulta Datos");
+                    console.log("Pruebas "+this.buscador);
+                    if(this.buscador){
+
+                    }
                     axios
                     .get(`${this.$store.getters.getServerPath}/auth/user/posts?page=`+this.numPagInt)
                     .then(response => {//Respuesta de la Api 
-                        this.items = this.items.concat(response.data.pagination.data);
-                        this.totNumPagInt = response.data.pagination.total;
+                        this.items = this.items.concat(response.data.data);
+                        this.totNumPagInt = response.data.count;
                         this.numPagInt = this.numPagInt + 1;
-                        if(this.totNumPagInt == response.data.pagination.to){
+                        if(response.data.page == response.data.pages){
                             this.processing = true;
                         }
                     })
