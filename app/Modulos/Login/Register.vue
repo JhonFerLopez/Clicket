@@ -8,47 +8,53 @@
                 @tap="goBack"
             ></NavigationButton>
         </ActionBar>
-        <StackLayout >
-            <TextField
-                class="input input-rounded"
-                hint="Nombre Completo"
-                :isEnabled="!processing"
-                autocorrect="false"
-                autocapitalizationType="words"
-                v-model="user.name"
-                returnKeyType="next"
-               @returnPress="focusLastName"
-            ></TextField>
-            <TextField
-                class="input input-rounded"
-                ref="password"
-                hint="Contraseña"
-                secure="true"
-                autocorrect="false"
-                v-model="user.password"
-                autocapitalizationType="none"
-                returnKeyType="next"
-                @returnPress="focusRePassword"
-            ></TextField>
-            <TextField
-                class="input input-rounded"
-                ref="repassword"
-                hint="Repetir Contraseña"
-                secure="true"
-                v-model="user.repassword"
-                returnKeyType="done"
-                @returnPress="registerUser"
-            ></TextField>
-
-            <Button
-                text="Finalizar"
-                @tap="registerUser"
-                :isEnabled="!processing"
-                class="btn-green"
-            ></Button>
-
+        <StackLayout class="form">
+            <label class="text-label" text="Completa estos datos para continuar" />
+            <StackLayout class="input-field">
+                <TextField
+                    class="input input-rounded"
+                    hint="Nombre Completo"
+                    :isEnabled="!processing"
+                    autocorrect="false"
+                    autocapitalizationType="words"
+                    v-model="user.name"
+                    returnKeyType="next"
+                @returnPress="focusLastName"
+                ></TextField>
+            </StackLayout>
+            <StackLayout class="input-field">
+                <TextField
+                    class="input input-rounded"
+                    ref="password"
+                    hint="Contraseña"
+                    secure="true"
+                    autocorrect="false"
+                    v-model="user.password"
+                    autocapitalizationType="none"
+                    returnKeyType="next"
+                    @returnPress="focusRePassword"
+                ></TextField>
+            </StackLayout>
+            <StackLayout class="input-field">
+                <TextField
+                    class="input input-rounded"
+                    ref="repassword"
+                    hint="Repetir Contraseña"
+                    secure="true"
+                    v-model="user.repassword"
+                    returnKeyType="done"
+                    @returnPress="registerUser"
+                ></TextField>
+            </StackLayout>
+            <StackLayout class="btn-button">
+                <Button
+                    text="Continuar"
+                    @tap="registerUser"
+                    :isEnabled="!processing"
+                    class="btn btn-primary"
+                ></Button>
+            </StackLayout>
         </StackLayout>
-
     </page>
 </template>
 

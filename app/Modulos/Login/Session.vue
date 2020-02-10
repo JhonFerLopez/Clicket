@@ -9,23 +9,28 @@
             ></NavigationButton>
         </ActionBar>    
 
-        <StackLayout >
-            <TextField
-                class="input-password"
-                hint="Contraseña"
-                ref="password"
-                :isEnabled="!processing"
-                secure="true"
-                v-model="user.password"
-                returnKeyType="done"
-                @returnPress="submit"
-            ></TextField>
-            <Button
-                text="Ingresar"
-                @tap="submit"
-                :isEnabled="!processing"
-                class="btn-green" 
-            ></Button>
+        <StackLayout class="form">
+            <label class="text-label" text="¡ Hola de nuevo !" />
+            <StackLayout class="input-field">
+                <TextField
+                    class="input-password"
+                    hint="Contraseña"
+                    ref="password"
+                    :isEnabled="!processing"
+                    secure="true"
+                    v-model="user.password"
+                    returnKeyType="done"
+                    @returnPress="submit"
+                ></TextField>
+            </StackLayout>
+            <StackLayout class="btn-button">
+                <Button
+                    text="Continuar"
+                    @tap="submit"
+                    :isEnabled="!processing"
+                    class="btn btn-primary" 
+                ></Button>
+            </StackLayout>
         </StackLayout>
     </Page>
 </template>
