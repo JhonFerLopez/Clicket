@@ -4,7 +4,7 @@
             <StackLayout class="textbutton" height="15%" width="100%">
                 <FlexboxLayout alignItems="flex-start">       
                     <TextField
-                        class=""
+                        class="input input-rounded"
                         hint="Buscar algún tema"
                         autocorrect="false"
                         autocapitalizationType="none"
@@ -99,6 +99,7 @@
                     axios
                     .get(`${this.$store.getters.getServerPath}/auth/user/posts?page=`+this.numPagInt)
                     .then(response => {//Respuesta de la Api 
+                        console.log("Consulta Datos "+response.data.count);
                         this.items = this.items.concat(response.data.data);
                         this.totNumPagInt = response.data.count;
                         this.numPagInt = this.numPagInt + 1;

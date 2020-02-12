@@ -81,7 +81,7 @@ $color_button : rgb(253, 254, 254);
 
 .btn-image{
     border-radius: 30px;
-    padding: 5px;
+    padding: 10px;
 }
 
 .textbutton{
@@ -93,4 +93,8 @@ $color_button : rgb(253, 254, 254);
     font-family: 'Nordica Plus', 'nordicaclassicltext';
     font-weight: bold;
     font-size: 30;
+}
+.go_back{
+    background: $background_button;
+    color: $color_button;
 }

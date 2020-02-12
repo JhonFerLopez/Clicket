@@ -2,19 +2,19 @@
     <page>      
         <ActionBar class="ActionBar" flat="true">
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" 
-                android.position="left" @tap="goBack">
+                android.position="left" @tap="goBack" class="go_back">
             </NavigationButton>
             <Label text="Categorias" horizontalAlignment="center" />
         </ActionBar>
 
         <StackLayout width="90%" height="100%">
-            <StackLayout height="7%">  
+            <StackLayout height="10%">  
                 <!--componente : Recibe Propiedades -->
                 <Frame>
                     <CLabel :PText="'Mis Intereses: ' + CategoriaSeleccionada" />
                 </Frame>
             </StackLayout>
-            <StackLayout height="83%">
+            <StackLayout height="80%">
                 <ListView for="item in items" @itemTap="onItemTap">
                     <v-template>
                         <GridLayout width="100%" height="300" 
@@ -25,7 +25,7 @@
                                 height="120" 
                                 class="btn-image" 
                                 loadMode="async"/>
-                            <Label :text="item.id+' -- '+item.name" textWrap="true" row="0"
+                            <Label :text="item.name" textWrap="true" row="0"
                                 colSpan="3" horizontalAlignment="center"
                                 verticalAlignment="center" class="label-float"></Label>                        
                         </GridLayout>

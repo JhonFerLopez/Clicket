@@ -11,7 +11,7 @@
                             height="120" 
                             class="btn-image" 
                             loadMode="async"/>
-                        <Label :text="item.id+' -- '+item.name" textWrap="true" row="0"
+                        <Label :text="item.name" textWrap="true" row="0"
                             colSpan="3" horizontalAlignment="center"
                             verticalAlignment="center" class="label-float"></Label>                        
                     </GridLayout>
