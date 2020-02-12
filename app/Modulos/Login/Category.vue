@@ -1,53 +1,33 @@
 <template>
     <page>      
-        <ActionBar title="Categoria" >
-            <NavigationButton 
-                text="Go Back" 
-                android.systemIcon="ic_menu_back"
-                android.position="left"
-                @tap="goBack"
-            ></NavigationButton>
-            <ActionItem 
-                ios.systemIcon="3" 
-                android.systemIcon="ic_menu_save" 
-                ios.position="right"
-                @tap="save"
-            ></ActionItem>
-        </ActionBar> 
+        <ActionBar title="Categorias" flat="true">
+            <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" 
+                android.position="left" @tap="goBack">
+            </NavigationButton>
+        </ActionBar>
 
-        <FlexboxLayout 
-            flexDirection="column" 
-            width="100%"             
-        > 
-            <FlexboxLayout
-                flexDirection="column"
-                height="100"
-            >
-                <StackLayout>  
-                    <!--componente : Recibe Propiedades -->
-                    <Frame>
-                        <CLabel :PText="'Mis Intereses: ' + CategoriaSeleccionada" />
-                    </Frame>  
-                </StackLayout>
-            </FlexboxLayout>
-            <ScrollView orientation="vertical" class="scroll-height full-width">
-                <FlexboxLayout
-                    flexDirection="column"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    class="full-width"
-                >                            
-                    <StackLayout v-if="datos.length > 0">
-                        <StackLayout v-for="detalle in datos" :key="detalle.id">
-                            <FlexboxLayout flexDirection="column" @tap="showOffer(detalle)">
-                                <Label :text="detalle.name"></Label>
-                                <Image src="~/assets/images/offer/automoviles.png"></Image> 
-                            </FlexboxLayout>
-                        </StackLayout>
-                    </StackLayout>
-                </FlexboxLayout>
-            </ScrollView>
-        </FlexboxLayout>
+        <StackLayout width="90%" height="100%">
+            <StackLayout height="7%">  
+                <!--componente : Recibe Propiedades -->
+                <Frame>
+                    <CLabel :PText="'Mis Intereses: ' + CategoriaSeleccionada" />
+                </Frame>
+            </StackLayout>
+            <StackLayout height="83%">
+                <ListView for="item in items" @itemTap="onItemTap">
+                    <v-template>
+                        <FlexboxLayout flexDirection="column" width="100%"
+                            height="300">
+                            <Image class="btn-image" src="~/assets/images/offer/automoviles.png">
+                            </Image>
+                        </FlexboxLayout>
+                    </v-template>
+                </ListView>
+            </StackLayout>
+            <StackLayout class="btn-button" height="10%">
+                <Button text="Continuar" @tap="save" class="btn btn-primary"></Button>
+            </StackLayout>
+        </StackLayout> 
     </page>
 </template>
 
@@ -62,7 +42,7 @@
         //Variables
         data() {
             return {
-                datos : [],
+                items : [],
                 datosInterests : [],
                 info : ""
             };
@@ -81,11 +61,14 @@
             goBack() {
                 goToSection(this, this.$router.welcome, {}, "slideRight", true);
             },
-            showOffer(payload) {//Metodo para Agregar o quitar Valores de un Array Object
-                var acction = this.validaInteres(payload.id);
+            onItemTap(event) {//Metodo para Agregar o quitar Valores de un Array Object
+                const view = event.view;
+                const page = view.page;
+                const tappedItem = view.bindingContext;
+                var acction = this.validaInteres(tappedItem.id);
                 if(acction[0]){
                     this.datosInterests.push({
-                        id : payload.id ,  name : payload.name
+                        id : tappedItem.id ,  name : tappedItem.name
                     })
                 }else{
                     this.datosInterests.splice(acction[1],1);
@@ -107,7 +90,7 @@
                 axios
                 .get(`${this.$store.getters.getServerPath}/auth/tags`)
                 .then(response => {
-                    this.datos = response.data.data;    
+                    this.items = response.data.data;    
                 })
                 .catch(response => {
                     console.log(response.data);

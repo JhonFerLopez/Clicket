@@ -1,15 +1,20 @@
 <template>
     <Page actionBarHidden="true">
-        <!--<ScrollView orientation="vertical" class="scroll-height full-width">-->
+        <StackLayout height="100%" width="90%">
             <ListView for="item in items" @itemTap="onItemTap">
                 <v-template>
-                    <FlexboxLayout flexDirection="column">
+                    <FlexboxLayout flexDirection="column" width="100%"
+                        height="300">
                         <Label :text="item.id+' -- '+item.name" textWrap="true" ></Label>
-                        <Image row="2" :src="urlPhoto+'/' + item.image" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
+                        <Image row="2" :src="urlPhoto+'/' + item.image" 
+                            stretch="aspectFill" 
+                            height="120" 
+                            class="btn-image" 
+                            loadMode="async"/>
                     </FlexboxLayout>
                 </v-template>
             </ListView>   
-        <!--</ScrollView>-->
+        </StackLayout>
     </Page>
 </template>
 

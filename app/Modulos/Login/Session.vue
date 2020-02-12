@@ -1,6 +1,6 @@
 <template>
     <Page>
-        <ActionBar title="Solicitud de Contraseña" >
+        <ActionBar title="Solicitud de Contraseña" class="ActionBar" flat="true">
             <NavigationButton 
                 text="Go Back" 
                 android.systemIcon="ic_menu_back"
@@ -9,7 +9,7 @@
             ></NavigationButton>
         </ActionBar>    
 
-        <StackLayout class="form">
+        <StackLayout class="form" width="90%">
             <label class="text-label" text="¡ Hola de nuevo !" />
             <StackLayout class="input-field">
                 <TextField

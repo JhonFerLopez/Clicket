@@ -24,6 +24,13 @@ $color_button : rgb(253, 254, 254);
     padding: 5%;
 }
 
+.lupa{
+    background: $background_button;
+    color: $color_button;
+    border:solid 1px #000;
+    border-radius: 10%;
+}
+
 .input-field{
     padding: 5%;
 }
@@ -50,4 +57,27 @@ $color_button : rgb(253, 254, 254);
     padding: 12%;
     text-align: left;
     font-weight: bold;
+}
+
+.btn-image{
+    border-radius: 30px;
+    height: 300px;
+}
+
+.ActionBar{   
+    color: $background_button; 
+    font-size: 22; 
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: bold;
+    background: #ffffff;
+}
+
+.btn-image{
+    border-radius: 30px;
+    padding: 5px;
+}
+
+.textbutton{
+    padding: 2%;
 }

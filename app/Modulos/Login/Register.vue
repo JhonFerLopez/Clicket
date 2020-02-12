@@ -1,6 +1,6 @@
 <template>
     <Page>
-        <ActionBar title="Registro De Usuario" >
+        <ActionBar title="Registro De Usuario" class="ActionBar" flat="true">
             <NavigationButton 
                 text="Go Back" 
                 android.systemIcon="ic_menu_back"
@@ -8,7 +8,7 @@
                 @tap="goBack"
             ></NavigationButton>
         </ActionBar>
-        <StackLayout class="form">
+        <StackLayout class="form" width="90%">
             <label class="text-label" text="Completa estos datos para continuar" />
             <StackLayout class="input-field">
                 <TextField

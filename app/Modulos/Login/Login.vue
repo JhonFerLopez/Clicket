@@ -4,7 +4,7 @@
       <StackLayout height="70%">
         <Image src="~/assets/images/Clicket.png"></Image> 
       </StackLayout>
-      <StackLayout class="input-field" height="10%">
+      <StackLayout class="input-field" height="10%" width="90%">
         <TextField
           class="input"
           hint="Introduce tu email"
@@ -17,7 +17,7 @@
           @returnPress="submit"
         ></TextField>
       </StackLayout>
-      <StackLayout class="btn-button" height="10%">
+      <StackLayout class="btn-button" height="10%" width="90%">
         <Button
           text="Continuar"
           @tap="submit"
@@ -25,7 +25,7 @@
           class="btn btn-primary"
         ></Button>
       </StackLayout>
-      <StackLayout height="10%">
+      <StackLayout height="10%" width="90%">
         <label class="text-field" text="Al continuar, aceptas las condiciones del Servicio."/>
       </StackLayout>
     </StackLayout>

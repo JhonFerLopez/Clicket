@@ -1,37 +1,49 @@
 <template>
-    <page actionBarHidden="true">    
-        <FlexboxLayout flexDirection="column" height="100%" backgroundColor="#3c495e">        
-            <TextField
-                class="input-login"
-                hint="Buscar algún tema"
-                autocorrect="false"
-                autocapitalizationType="none"
-                v-model="buscador"
-                returnKeyType="next"
-                @returnPress="submit"
-                height="7%"
-            ></TextField>
-            
-            <FlexboxLayout flexDirection="column" height="86%" backgroundColor="red">
+    <page actionBarHidden="true"> 
+        <StackLayout width="90%" height="100%">
+            <StackLayout class="textbutton" height="15%" width="100%">
+                <FlexboxLayout alignItems="flex-start">       
+                    <TextField
+                        class=""
+                        hint="Buscar algún tema"
+                        autocorrect="false"
+                        autocapitalizationType="none"
+                        v-model="buscador"
+                        returnKeyType="next"
+                        @returnPress="submit"
+                        width="70%"
+                        height="50%" 
+                        horizontalAlignment="left"
+                        verticalAlignment="center"
+                    ></TextField>
+                    <Button text="Buscar" class="lupa" width="30%"
+                        horizontalAlignment="right" height="50%"
+                        verticalAlignment="center" 
+                        :isEnabled="!processing" 
+                        @tap="getInteres">
+                    </Button>
+                </FlexboxLayout>
+            </StackLayout>
+            <StackLayout height="85%">
                 <ListView for="item in items" @itemTap="onItemTap">
                     <v-template>
-                        <FlexboxLayout flexDirection="column">
-                            <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
+                        <FlexboxLayout flexDirection="column" width="100%" height="300">
+                            <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="btn-image" loadMode="async"/>
                         </FlexboxLayout>
                     </v-template>
-                </ListView>                     
-            </FlexboxLayout>
-            <Button :text="'Ver Mas ++'" height="7%" 
-                :isEnabled="!processing" 
-                @tap="getInteres"/>
-        </FlexboxLayout>        
+                </ListView>
+                <StackLayout class="btn-button" height="10%">
+                    <Button text="Ver Mas" @tap="getInteres" class="btn btn-primary"></Button>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>       
     </page>
 </template>
 
 <script>
     //LLamado a Axios: Conexion API a BD.
     import axios from "axios";
-    import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
+    import { AuthAxiosToken, goToSection, isEmpty } from "~/../app/helpers/index.js";
     //Llamado a componentes
     import CLabel from './../../components/CLabel';
     import SinglePost from "./SinglePost.vue";
@@ -95,6 +107,7 @@
                         }
                     })
                     .catch(response => {//Respuesta de la Api en Caso De Error
+                        goToSection(this, this.$router.category, {}, "slideRight", true);                         
                         console.log(response.data);
                         console.log(response.data.errors);
                     });

@@ -1,6 +1,7 @@
 <template lang="html">
     <page>
-        <ActionBar title="CLICKET">
+        <ActionBar class="ActionBar" flat="true">
+            <Label text="CLICKET" horizontalAlignment="center" />
         </ActionBar> 
         <BottomNavigation>
             <TabStrip>
