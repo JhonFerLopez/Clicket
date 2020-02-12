@@ -1,6 +1,7 @@
 <template>
     <Page actionBarHidden="true">
-        <Button :text="ButtonText" @tap="onButtonTap">
+        <Button :text="ButtonText" @tap="onButtonTap" class="btnInteres" 
+            horizontalAlignment="left" verticalAlignment="center">
         </Button>
     </Page>
 </template>
@@ -94,5 +95,13 @@
 </script>
 
 <style scoped>
-
+    .btnInteres{
+        background: rgb(140, 112, 251);
+        color: rgb(253, 254, 254);
+        border-radius: 30px;
+        font-size: 20;
+        font-weight: bold;
+        text-transform: capitalize;
+        height: 50%;
+    }
 </style>

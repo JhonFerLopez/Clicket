@@ -1,28 +1,40 @@
 <template>
     <Page >        
-        <ActionBar>
+        <ActionBar class="ActionBar" flat="true">
             <NavigationButton @tap="navigateBack" android.systemIcon="ic_menu_back"/>
-            <Label text="Clicket"></Label>
+            <Label text="CLICKET" horizontalAlignment="center" />
         </ActionBar> 
-        
-        <FlexboxLayout >            
-            <FlexboxLayout flexDirection="column" backgroundColor="#FAD7D0">
-                <Label class="m-10 h3" :text="context.name" verticalAlignment="top" ></Label>
+        <StackLayout width="90%" height="100%">
+            <StackLayout class="textbutton" height="10%" width="100%" background="red">
+                <Frame>
+                    <CLabel :PText="context.name" />
+                </Frame>
+                <!--<Label class="m-10 h3" :text="context.name" verticalAlignment="top" ></Label>                -->
+            </StackLayout>
+            <StackLayout class="textbutton" height="10%" width="100%">
                 <Frame> 
                     <CButtonInterests :PDatos="context" />
                 </Frame>
-            </FlexboxLayout>
-            <FlexboxLayout>
+            </StackLayout>
+            <StackLayout height="80%">
                 <ListView for="item in items" @itemTap="onItemTap">
                     <v-template>
-                        <FlexboxLayout flexDirection="column">
-                            <Label :text="item.id+' -- '+item.name" textWrap="true" ></Label>
-                            <Image row="2" :src="urlPhoto+'/' + item.image" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
-                        </FlexboxLayout>
+                        <GridLayout width="100%"
+                            height="300" rows="auto" columns="*, *, *">
+                            <Image :src="urlPhoto+'/' + item.image" 
+                                row="0" colSpan="3"                            
+                                stretch="aspectFill" 
+                                height="120" 
+                                class="btn-image" 
+                                loadMode="async"/>
+                            <Label :text="item.name" textWrap="true" row="0"
+                                colSpan="3" horizontalAlignment="center"
+                                verticalAlignment="center" class="label-float"></Label>                        
+                        </GridLayout>
                     </v-template>
                 </ListView>
-            </FlexboxLayout>
-        </FlexboxLayout> 
+            </StackLayout>
+        </StackLayout>
     </Page>
 </template>
 
@@ -32,6 +44,7 @@
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     import ItemSubCategories from "./ItemSubCategories.vue";
     import CButtonInterests from './../../components/CButtonInterests';
+    import CLabel from './../../components/CLabel';
     
     export default {
         props: ["context"],
@@ -42,7 +55,8 @@
             };
         },
         components : {
-            CButtonInterests
+            CButtonInterests,
+            CLabel
         },
         created() {
             AuthAxiosToken(axios, this);           
