@@ -1,9 +1,10 @@
 <template>
     <page>      
-        <ActionBar title="Categorias" flat="true">
+        <ActionBar class="ActionBar" flat="true">
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" 
                 android.position="left" @tap="goBack">
             </NavigationButton>
+            <Label text="Categorias" horizontalAlignment="center" />
         </ActionBar>
 
         <StackLayout width="90%" height="100%">
@@ -16,11 +17,18 @@
             <StackLayout height="83%">
                 <ListView for="item in items" @itemTap="onItemTap">
                     <v-template>
-                        <FlexboxLayout flexDirection="column" width="100%"
-                            height="300">
-                            <Image class="btn-image" src="~/assets/images/offer/automoviles.png">
-                            </Image>
-                        </FlexboxLayout>
+                        <GridLayout width="100%" height="300" 
+                            rows="auto" columns="*, *, *">
+                            <Image :src="urlPhoto+'/' + item.image" 
+                                row="0" colSpan="3"                            
+                                stretch="aspectFill" 
+                                height="120" 
+                                class="btn-image" 
+                                loadMode="async"/>
+                            <Label :text="item.id+' -- '+item.name" textWrap="true" row="0"
+                                colSpan="3" horizontalAlignment="center"
+                                verticalAlignment="center" class="label-float"></Label>                        
+                        </GridLayout>
                     </v-template>
                 </ListView>
             </StackLayout>
@@ -44,7 +52,8 @@
             return {
                 items : [],
                 datosInterests : [],
-                info : ""
+                info : "",
+                urlPhoto : this.$store.getters.getServerPhoto,
             };
         },
         //LLamado a Componentes

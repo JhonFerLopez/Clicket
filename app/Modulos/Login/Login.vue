@@ -6,7 +6,7 @@
       </StackLayout>
       <StackLayout class="input-field" height="10%" width="90%">
         <TextField
-          class="input"
+          class="input input-rounded" 
           hint="Introduce tu email"
           :isEnabled="!processing"
           keyboardType="email"

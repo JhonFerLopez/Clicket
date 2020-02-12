@@ -1,15 +1,16 @@
 <template>
     <Page>
-        <ActionBar title="Registro De Usuario" class="ActionBar" flat="true">
+        <ActionBar class="ActionBar" flat="true">
             <NavigationButton 
                 text="Go Back" 
                 android.systemIcon="ic_menu_back"
                 android.position="left"
                 @tap="goBack"
             ></NavigationButton>
+            <Label text="" horizontalAlignment="center" />
         </ActionBar>
         <StackLayout class="form" width="90%">
-            <label class="text-label" text="Completa estos datos para continuar" />
+            <label class="text-label" text="Completa estos datos para continuar" textWrap="true"/>
             <StackLayout class="input-field">
                 <TextField
                     class="input input-rounded"
@@ -19,7 +20,7 @@
                     autocapitalizationType="words"
                     v-model="user.name"
                     returnKeyType="next"
-                @returnPress="focusLastName"
+                    @returnPress="focusLastName"
                 ></TextField>
             </StackLayout>
             <StackLayout class="input-field">

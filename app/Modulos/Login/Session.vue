@@ -1,19 +1,20 @@
 <template>
     <Page>
-        <ActionBar title="Solicitud de Contraseña" class="ActionBar" flat="true">
+        <ActionBar class="ActionBar" flat="true">
             <NavigationButton 
                 text="Go Back" 
                 android.systemIcon="ic_menu_back"
                 android.position="left"
                 @tap="goBack"
             ></NavigationButton>
-        </ActionBar>    
+            <Label text="" horizontalAlignment="center" />
+        </ActionBar>   
 
         <StackLayout class="form" width="90%">
             <label class="text-label" text="¡ Hola de nuevo !" />
             <StackLayout class="input-field">
                 <TextField
-                    class="input-password"
+                    class="input input-rounded"
                     hint="Contraseña"
                     ref="password"
                     :isEnabled="!processing"

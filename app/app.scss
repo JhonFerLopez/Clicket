@@ -1,7 +1,7 @@
-//Variables de colores Estandar
-//@import '~@nativescript/theme/css/core.css';
-//@import '~@nativescript/theme/css/default.css';
+@import '~@nativescript/theme/css/core.css';
+@import '~@nativescript/theme/css/default.css';
 
+//Variables de colores Estandar
 $background_button: rgb(140, 112, 251);
 $color_button : rgb(253, 254, 254);
 
@@ -13,11 +13,16 @@ $color_button : rgb(253, 254, 254);
     margin-left: 0;
     margin-right: 0;
     flex-grow: 2;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 .input{
+    background: #F2F2F2;
     font-size: 17;
+    margin: 0;
+    border: solid 1px #000;
+    border-radius: 10%;
+    padding-left: 20%;
 }
 
 .btn-button{
@@ -52,7 +57,8 @@ $color_button : rgb(253, 254, 254);
 }
 
 .text-label{
-    font-size: 22; 
+    color: #000;
+    font-size: 20; 
     text-transform: capitalize;
     padding: 12%;
     text-align: left;
@@ -66,7 +72,7 @@ $color_button : rgb(253, 254, 254);
 
 .ActionBar{   
     color: $background_button; 
-    font-size: 22; 
+    font-size: 26; 
     text-transform: capitalize;
     text-align: center;
     font-weight: bold;
@@ -80,4 +86,11 @@ $color_button : rgb(253, 254, 254);
 
 .textbutton{
     padding: 2%;
+}
+
+.label-float {
+    color: White;
+    font-family: 'Nordica Plus', 'nordicaclassicltext';
+    font-weight: bold;
+    font-size: 30;
 }

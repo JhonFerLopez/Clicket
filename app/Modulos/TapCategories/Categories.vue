@@ -3,15 +3,18 @@
         <StackLayout height="100%" width="90%">
             <ListView for="item in items" @itemTap="onItemTap">
                 <v-template>
-                    <FlexboxLayout flexDirection="column" width="100%"
-                        height="300">
-                        <Label :text="item.id+' -- '+item.name" textWrap="true" ></Label>
-                        <Image row="2" :src="urlPhoto+'/' + item.image" 
+                    <GridLayout width="100%"
+                        height="300" rows="auto" columns="*, *, *">
+                        <Image :src="urlPhoto+'/' + item.image" 
+                            row="0" colSpan="3"                            
                             stretch="aspectFill" 
                             height="120" 
                             class="btn-image" 
                             loadMode="async"/>
-                    </FlexboxLayout>
+                        <Label :text="item.id+' -- '+item.name" textWrap="true" row="0"
+                            colSpan="3" horizontalAlignment="center"
+                            verticalAlignment="center" class="label-float"></Label>                        
+                    </GridLayout>
                 </v-template>
             </ListView>   
         </StackLayout>
