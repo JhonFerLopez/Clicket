@@ -1,23 +1,23 @@
 <template>
     <Page >        
         <ActionBar class="ActionBar" flat="true">
-            <NavigationButton @tap="navigateBack" android.systemIcon="ic_menu_back"/>
+            <NavigationButton @tap="$navigateBack" android.systemIcon="ic_menu_back"/>
             <Label text="CLICKET" horizontalAlignment="center" />
         </ActionBar> 
         <StackLayout width="90%" height="100%">
-            <StackLayout class="textbutton" height="10%" width="100%" background="red">
+            <StackLayout class="textbutton" height="8%" width="100%">
                 <Frame>
                     <CLabel :PText="context.name" />
                 </Frame>
                 <!--<Label class="m-10 h3" :text="context.name" verticalAlignment="top" ></Label>                -->
             </StackLayout>
-            <StackLayout class="textbutton" height="10%" width="100%">
+            <StackLayout class="textbutton" height="12%" width="100%">
                 <Frame> 
                     <CButtonInterests :PDatos="context" />
                 </Frame>
             </StackLayout>
             <StackLayout height="80%">
-                <ListView for="item in items" @itemTap="onItemTap">
+                <ListView for="item in items" @itemTap="onItemTap"  height="100%">
                     <v-template>
                         <GridLayout width="100%"
                             height="300" rows="auto" columns="*, *, *">
@@ -85,7 +85,6 @@
                 console.log("test 1");
             },
             onItemTap (args) {
-//
                 const view = args.view;
                 const page = view.page;
                 const tappedItem = view.bindingContext;

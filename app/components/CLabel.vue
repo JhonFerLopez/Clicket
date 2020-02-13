@@ -23,9 +23,10 @@
 
 <style scoped>
   .text{
-      font-size: 16px;
+      font-family: Roboto Condensed;
+      font-size: 20px;
       color : black;
-      padding: 20px;
+      padding: 10px;
       margin: 10px;
       margin-bottom: 10%;
       font-weight: bold;

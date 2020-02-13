@@ -1,7 +1,7 @@
 <template>
     <Page actionBarHidden="true">
         <StackLayout height="100%" width="90%">
-            <ListView for="item in items" @itemTap="onItemTap">
+            <ListView for="item in items" @itemTap="onItemTap" height="100%">
                 <v-template>
                     <GridLayout width="100%"
                         height="300" rows="auto" columns="*, *, *">

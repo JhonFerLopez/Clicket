@@ -1,27 +1,40 @@
 <template>
     <Page >        
-        <ActionBar>
+        <ActionBar class="ActionBar" flat="true">
             <NavigationButton @tap="$navigateBack" android.systemIcon="ic_menu_back"/>
-            <Label text="Clicket"></Label>
-        </ActionBar>
-        <FlexboxLayout >          
-            <FlexboxLayout flexDirection="column" backgroundColor="#FAD7D0">
-                <Label class="m-10 h3" :text="context.name" verticalAlignment="top" ></Label>
+            <Label text="CLICKET" horizontalAlignment="center" />
+        </ActionBar> 
+        <StackLayout width="90%" height="100%">
+            <StackLayout class="textbutton" height="8%" width="100%">
+                <Frame>
+                    <CLabel :PText="context.name" />
+                </Frame>
+                <!--<Label class="m-10 h3" :text="context.name" verticalAlignment="top" ></Label>                -->
+            </StackLayout>
+            <StackLayout class="textbutton" height="12%" width="100%">
                 <Frame> 
                     <CButtonInterests :PDatos="context" />
                 </Frame>
-            </FlexboxLayout>
-            <GridLayout>
-                <ListView for="item in items" >
+            </StackLayout>
+            <StackLayout height="80%">
+                <ListView for="item in items" @itemTap="onItemTap"  height="100%">
                     <v-template>
-                        <FlexboxLayout flexDirection="column">
-                            <Label :text="item.id+' -- '+item.title" textWrap="true" ></Label>
-                            <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="m-r-20" loadMode="async"/>
-                        </FlexboxLayout>
+                        <GridLayout width="100%"
+                            height="300" rows="auto" columns="*, *, *">
+                            <Image :src="urlPhoto+'/' + item.post_url" 
+                                row="0" colSpan="3"                            
+                                stretch="aspectFill" 
+                                height="120" 
+                                class="btn-image" 
+                                loadMode="async"/>
+                            <Label :text="item.title" textWrap="true" row="0"
+                                colSpan="3" horizontalAlignment="center"
+                                verticalAlignment="center" class="label-float"></Label>                        
+                        </GridLayout>
                     </v-template>
                 </ListView>
-            </GridLayout> 
-        </FlexboxLayout >  
+            </StackLayout>
+        </StackLayout> 
     </Page>
 </template>
 
@@ -30,6 +43,7 @@
     import axios from "axios";
     import { AuthAxiosToken, goToSection } from "~/../app/helpers/index.js";
     import CButtonInterests from './../../components/CButtonInterests';
+    import CLabel from './../../components/CLabel';
     
     export default {
         props: ["context"],
@@ -40,7 +54,8 @@
             };
         },
         components : {
-            CButtonInterests
+            CButtonInterests,
+            CLabel
         },
         created() {
             AuthAxiosToken(axios, this);           
@@ -66,7 +81,10 @@
                         });
                     }
                 });
-            }
+            }/*,
+            navigateBack(){
+                goToSection(this, this.$router.welcome, {}, "slideRight", true);
+            }*/
         }
     }
 </script>

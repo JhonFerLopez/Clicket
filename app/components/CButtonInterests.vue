@@ -96,12 +96,13 @@
 
 <style scoped>
     .btnInteres{
+        font-family: Roboto Condensed;
         background: rgb(140, 112, 251);
         color: rgb(253, 254, 254);
         border-radius: 30px;
         font-size: 20;
         font-weight: bold;
         text-transform: capitalize;
-        height: 50%;
+        height: 70%;
     }
 </style>

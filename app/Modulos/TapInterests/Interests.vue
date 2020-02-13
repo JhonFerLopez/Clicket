@@ -25,7 +25,7 @@
                 </FlexboxLayout>
             </StackLayout>
             <StackLayout height="85%">
-                <ListView for="item in items" @itemTap="onItemTap">
+                <ListView for="item in items" @itemTap="onItemTap" height="100%">
                     <v-template>
                         <FlexboxLayout flexDirection="column" width="100%" height="300">
                             <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="btn-image" loadMode="async"/>
