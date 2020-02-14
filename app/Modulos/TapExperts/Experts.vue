@@ -1,21 +1,25 @@
 <template>
     <Page actionBarHidden="true" >    
-        <FlexboxLayout flexDirection="column" height="100%" backgroundColor="#3c495e">            
-            <Button :text="CategoryFilter.name" height="7%" @tap="showCategoriesPageModally" />
-            <Button :text="CityFilter.name" height="7%" @tap="showCityPageModally" />
-            <FlexboxLayout flexDirection="column" height="86%" backgroundColor="red"> 
-                <ListView for="item in itemList" @itemTap="onItemTap">
+        <StackLayout width="90%" height="100%">
+            <StackLayout class="btn-button" width="100%"  height="10%">
+                <Button :text="CategoryFilter.name" class="btn-modal" @tap="showCategoriesPageModally" />
+            </StackLayout> 
+            <StackLayout class="btn-button" width="100%"  height="10%">
+                <Button :text="CityFilter.name" class="btn-modal" @tap="showCityPageModally"/>
+            </StackLayout>
+            <StackLayout height="85%">
+                <ListView for="item in itemList" @itemTap="onItemTap"  height="88%">
                     <v-template>
-                        <FlexboxLayout flexDirection="column">
+                        <FlexboxLayout flexDirection="column" width="100%" height="300">
                             <label :text="item.name" height="10%" />
                             <Image row="2" :src="urlPhoto+'/' + item.picture" 
                                 stretch="aspectFill" height="120" 
-                                class="m-r-20" loadMode="async"/>
+                                class="btn-image" loadMode="async"/>
                         </FlexboxLayout>
                     </v-template>
                 </ListView>
-            </FlexboxLayout>           
-        </FlexboxLayout>  
+            </StackLayout>  
+        </StackLayout> 
     </Page>
 </template>
 
@@ -113,13 +117,17 @@
                         }
                     }
                 });
-                
-
             }
         }
     }
 </script>
 
 <style scoped>
+    .btn-modal{
+        text-align: center;
+        border-radius: 30%;
+        background: #F2F2F2;
+        border: solid 1px black;
+    }
 
 </style>

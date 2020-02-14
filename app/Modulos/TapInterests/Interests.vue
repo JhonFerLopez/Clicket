@@ -25,16 +25,16 @@
                 </FlexboxLayout>
             </StackLayout>
             <StackLayout height="85%">
-                <ListView for="item in items" @itemTap="onItemTap" height="100%">
+                <ListView for="item in items" @itemTap="onItemTap" height="88%">
                     <v-template>
                         <FlexboxLayout flexDirection="column" width="100%" height="300">
                             <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="btn-image" loadMode="async"/>
-                        </FlexboxLayout>
+                        </FlexboxLayout>                    
                     </v-template>
-                </ListView>
-                <StackLayout class="btn-button" height="10%">
-                    <Button text="Ver Mas" @tap="getInteres" class="btn btn-primary"></Button>
-                </StackLayout>
+                </ListView>                    
+            </StackLayout>
+            <StackLayout class="btn-button" height="12%">
+                <Button text="Ver Mas" @tap="getInteres" class="btn btn-primary"></Button>
             </StackLayout>
         </StackLayout>       
     </page>
