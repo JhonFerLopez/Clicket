@@ -2,7 +2,8 @@
     <page actionBarHidden="true"> 
         <StackLayout width="90%" height="100%">
             <StackLayout class="textbutton" height="15%" width="100%">
-                <FlexboxLayout alignItems="flex-start">       
+                <GridLayout width="100%" height="100%" 
+                        rows="auto" columns="*, *, *">      
                     <TextField
                         class="input input-rounded"
                         hint="Buscar algún tema"
@@ -11,18 +12,13 @@
                         v-model="buscador"
                         returnKeyType="next"
                         @returnPress="submit"
-                        width="70%"
-                        height="50%" 
+                        height="60%" colSpan="3" width="100%"
                         horizontalAlignment="left"
                         verticalAlignment="center"
                     ></TextField>
-                    <Button text="Buscar" class="lupa" width="30%"
-                        horizontalAlignment="right" height="50%"
-                        verticalAlignment="center" 
-                        :isEnabled="!processing" 
-                        @tap="getInteres">
-                    </Button>
-                </FlexboxLayout>
+                    <Image src="~/assets/images/search.png" width="8%" horizontalAlignment="right"
+                        height="100%" class="icon" @tap="getInteres" colSpan="3"/>
+                </GridLayout>
             </StackLayout>
             <StackLayout height="85%">
                 <ListView for="item in items" @itemTap="onItemTap" height="88%">
@@ -125,5 +121,7 @@
 </script>
 
 <style scoped>
-
+    .icon{
+        margin-right: 30px;
+    }
 </style>
