@@ -22,14 +22,28 @@
             </StackLayout>
             <GridLayout width="100%" height="85%" 
                         rows="auto" columns="*, *, *">
-                <ListView for="item in items" @itemTap="onItemTap" height="100%" colSpan="3">
+                <ScrollView colSpan="3" height="100%" scrollBarIndicatorVisible="false">
+                    <WrapLayout orientation="horizontal" width="100%">
+                        <StackLayout width="50%">
+                            <StackLayout v-for="item in items" :key="item.id" width="100%">
+                                <Image :src="urlPhoto+'/' + item.post_url" @tap="onItemTap(item)" stretch="aspectFill" loadMode="async" class="btn-image" ></Image> 
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout width="50%">
+                            <StackLayout v-for="item in items" :key="item.id" width="100%">
+                                <Image :src="urlPhoto+'/' + item.post_url" @tap="onItemTap(item)" stretch="aspectFill" loadMode="async" class="btn-image" ></Image> 
+                            </StackLayout>
+                        </StackLayout>
+                    </WrapLayout>
+                </ScrollView>
+                <!--<ListView for="item in items" @itemTap="onItemTap" height="100%" colSpan="3">
                     <v-template>
                         <FlexboxLayout flexDirection="column" width="100%" height="300">
                             <Image row="2" colSpan="3" :src="urlPhoto+'/' + item.post_url" 
                                 stretch="aspectFill" height="120" class="btn-image" loadMode="async"/>
                         </FlexboxLayout>                    
                     </v-template>
-                </ListView>
+                </ListView>-->
                 <StackLayout class="btn-button" height="100%" colSpan="3" 
                     horizontalAlignment="right"
                     verticalAlignment="bottom">
@@ -74,13 +88,13 @@
         //Metodos de la Pagina
         methods: {            
             onItemTap(event) {  
-                const view = event.view;
+                /*const view = event.view;
                 const page = view.page;
                 const tappedItem = view.bindingContext;
-                
+                */
                 this.$navigateTo(SinglePost, {
                     props: { 
-                        context: tappedItem,
+                        context: event,
                         animated: true,
                         transition: {
                             name: "slide",
