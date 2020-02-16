@@ -69,13 +69,44 @@ export default {
             }           
         };
     },
+    //Inicializador
+    created() {
+        AuthAxiosToken(axios, this);
+    },
     methods: {
         getLogout(){
             console.log("Peticion de Cierre");
             LogOut(axios, this, this.$router.login);
         },
         getUpdate(){
-
+            if(this.user.name != ""){
+                axios
+                .post(`${this.$store.getters.getServerPath}/auth/user/edit`, {
+                    name: this.user.name,
+                    email: this.user.email
+                })
+                .then(response => {
+                    this.processing = true;
+                    alert({
+                        title: "Actualización Exitosa",                        
+                        okButtonText: "OK"
+                    }).then(() => {
+                        let user = response.data.user;
+                        //Almacenar usuario
+                        this.$store.dispatch("addLoginUser", response.data.user);
+                    });
+                })
+                .catch(err => {
+                        console.dir(err.response);
+                    if (err.response.status == 422) {
+                        alert({
+                            title: "Error al Actualizar usuario",
+                            message: "Problemas al actualizar el usuario",
+                            okButtonText: "Error"
+                        });
+                    }
+                });
+            }
         },
         getViewPassword(){
             console.log("hola mundo  --> "+this.image);

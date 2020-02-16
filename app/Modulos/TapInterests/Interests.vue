@@ -11,7 +11,7 @@
                         autocapitalizationType="none"
                         v-model="buscador"
                         returnKeyType="next"
-                        @returnPress="submit"
+                        @returnPress="getInteres"
                         height="60%" colSpan="3" width="100%"
                         horizontalAlignment="left"
                         verticalAlignment="center"
@@ -20,18 +20,22 @@
                         height="100%" class="icon" @tap="getInteres" colSpan="3"/>
                 </GridLayout>
             </StackLayout>
-            <StackLayout height="85%">
-                <ListView for="item in items" @itemTap="onItemTap" height="88%">
+            <GridLayout width="100%" height="85%" 
+                        rows="auto" columns="*, *, *">
+                <ListView for="item in items" @itemTap="onItemTap" height="100%" colSpan="3">
                     <v-template>
                         <FlexboxLayout flexDirection="column" width="100%" height="300">
-                            <Image row="2" :src="urlPhoto+'/' + item.post_url" stretch="aspectFill" height="120" class="btn-image" loadMode="async"/>
+                            <Image row="2" colSpan="3" :src="urlPhoto+'/' + item.post_url" 
+                                stretch="aspectFill" height="120" class="btn-image" loadMode="async"/>
                         </FlexboxLayout>                    
                     </v-template>
-                </ListView>                    
-            </StackLayout>
-            <StackLayout class="btn-button" height="12%">
-                <Button text="Ver Mas" @tap="getInteres" class="btn btn-primary"></Button>
-            </StackLayout>
+                </ListView>
+                <StackLayout class="btn-button" height="100%" colSpan="3" 
+                    horizontalAlignment="right"
+                    verticalAlignment="bottom">
+                    <Button text="+" @tap="getInteres" class="btn-mas" ></Button>
+                </StackLayout>
+            </GridLayout>
         </StackLayout>       
     </page>
 </template>
@@ -51,6 +55,8 @@
                 items : [],
                 numPagInt: 1,
                 totNumPagInt: 0,
+                busquedaOld: "",
+                search : "",
                 urlPhoto : this.$store.getters.getServerPhoto,
                 buscador : "",
                 processing: false,
@@ -86,21 +92,37 @@
             },           
             getInteres(){
                 //Consumo de la Api
-                if(!this.processing){
-                    console.log("Consulta Datos");
-                    console.log("Pruebas "+this.buscador);
-                    if(this.buscador){
-
+                //if(!this.processing){
+                    //Buscador
+                    if(this.buscador != this.busquedaOld && this.buscador != ""){
+                        this.search = "&search=" + this.buscador;
+                        this.numPagInt = 1;             
+                        this.busquedaOld = this.buscador;           
+                    }else if(this.buscador == "" && this.busquedaOld !=""){
+                        this.search =  "";
+                        this.busquedaOld = "";
+                        this.numPagInt = 1;             
+                    }else{
+                        
                     }
+                    console.log("Pagina "+this.numPagInt);
+                    console.log("busqueda "+this.buscador);
+                    console.log("search "+this.search);
                     axios
-                    .get(`${this.$store.getters.getServerPath}/auth/user/posts?page=`+this.numPagInt)
+                    .get(`${this.$store.getters.getServerPath}/auth/user/posts?page=`+this.numPagInt+this.search)
                     .then(response => {//Respuesta de la Api 
-                        console.log("Consulta Datos "+response.data.count);
-                        this.items = this.items.concat(response.data.data);
+                        console.log("Si hay datos");
+                        if(response.data.page == 1){
+                            this.items = response.data.data;
+                        }else{
+                            this.items = this.items.concat(response.data.data);
+                        }
                         this.totNumPagInt = response.data.count;
                         this.numPagInt = this.numPagInt + 1;
                         if(response.data.page == response.data.pages){
                             this.processing = true;
+                        }else{
+                            this.processing = false;
                         }
                     })
                     .catch(response => {//Respuesta de la Api en Caso De Error
@@ -108,7 +130,7 @@
                         console.log(response.data);
                         console.log(response.data.errors);
                     });
-                }            
+                //}            
             },
             Pagination(){
 
@@ -123,5 +145,9 @@
 <style scoped>
     .icon{
         margin-right: 30px;
+    }
+    .btn-mas{
+        border-radius: 100%;
+          background: rgb(140, 112, 251);
     }
 </style>

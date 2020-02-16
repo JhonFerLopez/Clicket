@@ -15,7 +15,7 @@
                 </Frame>
             </StackLayout>
             <StackLayout height="80%">
-                <ListView for="item in items" @itemTap="onItemTap">
+                <ListView for="item in items" @itemTap="onItemTap" height="100%">
                     <v-template>
                         <GridLayout width="100%" height="300" 
                             rows="auto" columns="*, *, *">
