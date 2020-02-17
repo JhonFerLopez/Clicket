@@ -8,10 +8,11 @@
                     <Image :src="urlPhoto+'/' + datos.post_url" 
                         loadMode="async" stretch="aspectFill" colSpan="3">
                     </Image> 
-                    <Button text="<" class="go_back" width="120px"
-                        horizontalAlignment="left" height="120px" 
-                        verticalAlignment="top" @tap="navigateBack">
-                    </Button>
+                    <Image src="~/assets/images/BackButtonpurple.png" 
+                        loadMode="async" stretch="aspectFill" colSpan="3"
+                        horizontalAlignment="left" verticalAlignment="top" 
+                        @tap="navigateBack">
+                    </Image>
                 </GridLayout>  
                 <StackLayout width="70%" horizontalAlignment="center">
                     <Label :text="datos.title" textWrap="true" class="text-label"></Label> 

@@ -7,19 +7,19 @@
             <TabStrip>
                 <TabStripItem class="navigation__item">
                     <Label text="Home"></Label>
-                    <Image src.decode="font://&#xf015;" class="fas t-36"></Image>
+                    <Image src.decode="~/assets/images/dashboardpurple.png" class="fas t-36"></Image>
                 </TabStripItem>
                 <TabStripItem class="navigation__item">
                     <Label text="Browse"></Label>
-                    <Image src.decode="font://&#xf1ea;" class="far t-36"></Image>
+                    <Image src.decode="~/assets/images/listpurple.png" class="far t-36"></Image>
                 </TabStripItem>
                 <TabStripItem class="navigation__item">
                     <Label text="Search"></Label>
-                    <Image src.decode="font://&#xf002;" class="fas t-36"></Image>
+                    <Image src.decode="~/assets/images/searchpurple.png" class="fas t-36"></Image>
                 </TabStripItem>                
                 <TabStripItem class="navigation__item">
                     <Label text="Search"></Label>
-                    <Image src.decode="font://&#xf002;" class="fas t-36"></Image>
+                    <Image src.decode="~/assets/images/userpurple.png" class="fas t-36"></Image>
                 </TabStripItem>
             </TabStrip>
 
