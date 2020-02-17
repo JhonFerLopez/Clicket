@@ -25,13 +25,15 @@
                 <ScrollView colSpan="3" height="100%" scrollBarIndicatorVisible="false">
                     <WrapLayout orientation="horizontal" width="100%">
                         <StackLayout width="50%">
-                            <StackLayout v-for="item in items" :key="item.id" width="100%">
-                                <Image :src="urlPhoto+'/' + item.post_url" @tap="onItemTap(item)" stretch="aspectFill" loadMode="async" class="btn-image" ></Image> 
+                            <StackLayout v-for="item2 in items2" :key="item2.id" width="100%">
+                                <Image :src="urlPhoto+'/' + item2.post_url" @tap="onItemTap(item2)" 
+                                    stretch="aspectFill" loadMode="async" class="btn-image-interes" ></Image> 
                             </StackLayout>
                         </StackLayout>
                         <StackLayout width="50%">
-                            <StackLayout v-for="item in items" :key="item.id" width="100%">
-                                <Image :src="urlPhoto+'/' + item.post_url" @tap="onItemTap(item)" stretch="aspectFill" loadMode="async" class="btn-image" ></Image> 
+                            <StackLayout v-for="item1 in items1" :key="item1.id" width="100%">
+                                <Image :src="urlPhoto+'/' + item1.post_url" @tap="onItemTap(item1)" 
+                                    stretch="aspectFill" loadMode="async" class="btn-image-interes" ></Image> 
                             </StackLayout>
                         </StackLayout>
                     </WrapLayout>
@@ -66,7 +68,8 @@
         //Variables
         data() {
             return {
-                items : [],
+                items1 : [],
+                items2 : [],
                 numPagInt: 1,
                 totNumPagInt: 0,
                 busquedaOld: "",
@@ -125,11 +128,25 @@
                     axios
                     .get(`${this.$store.getters.getServerPath}/auth/user/posts?page=`+this.numPagInt+this.search)
                     .then(response => {//Respuesta de la Api 
-                        console.log("Si hay datos");
+                        console.log("Si hay datos");                           
                         if(response.data.page == 1){
-                            this.items = response.data.data;
+                            this.items1 = [];
+                            this.items2 = [];
+                            for(let i = 0; i < response.data.data.length; i++){
+                                if(i % 2){
+                                    this.items1.push(response.data.data[i]);
+                                }else{
+                                    this.items2.push(response.data.data[i]);
+                                }
+                            }                            
                         }else{
-                            this.items = this.items.concat(response.data.data);
+                            for(let i = 0; i < response.data.data.length; i++){
+                                if(i % 2){
+                                    this.items1.push(response.data.data[i]);
+                                }else{
+                                    this.items2.push(response.data.data[i]);
+                                }
+                            } 
                         }
                         this.totNumPagInt = response.data.count;
                         this.numPagInt = this.numPagInt + 1;
@@ -145,12 +162,6 @@
                         console.log(response.data.errors);
                     });
                 //}            
-            },
-            Pagination(){
-
-            },
-            submit(){
-
             }
         }
     }
@@ -163,5 +174,10 @@
     .btn-mas{
         border-radius: 100%;
           background: rgb(140, 112, 251);
+    }
+    .btn-image-interes{
+        border-radius: 50px;
+        height:auto;
+        padding: 5%;
     }
 </style>
