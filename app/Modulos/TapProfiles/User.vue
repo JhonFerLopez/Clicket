@@ -6,7 +6,7 @@
                     horizontalAlignment="center"  
                     verticalAlignment="center">
                     <Image :src="urlPhoto+'/expert.png'" class="image-profile" 
-                        loadMode="async" stretch="aspectFill" background="red"/>            
+                        loadMode="async" stretch="aspectFill"/>            
                 </StackLayout>
                 <StackLayout class="input-field">
                     <Label :text="this.user.email" textWrap="true" horizontalAlignment="center" ></Label> 

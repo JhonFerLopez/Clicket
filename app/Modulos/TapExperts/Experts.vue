@@ -8,6 +8,25 @@
                 <Button :text="CityFilter.name" class="btn-modal" @tap="showCityPageModally"/>
             </StackLayout>
             <StackLayout height="85%">
+                <ScrollView height="100%" scrollBarIndicatorVisible="false">
+                    <WrapLayout orientation="horizontal" width="100%">
+                        <StackLayout width="50%">
+                            <StackLayout v-for="item2 in itemList2" :key="item2.id" width="100%">
+                                <label :text="item2.name" height="10%"  horizontalAlignment="center"/>
+                                <Image :src="urlPhoto+'/' + item2.picture" @tap="onItemTap(item2)" 
+                                    stretch="aspectFill" loadMode="async" class="btn-image-expert" ></Image> 
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout width="50%">
+                            <StackLayout v-for="item1 in itemList1" :key="item1.id" width="100%">
+                                <label :text="item1.name" height="10%" horizontalAlignment="center"/>
+                                <Image :src="urlPhoto+'/' + item1.picture" @tap="onItemTap(item1)" 
+                                    stretch="aspectFill" loadMode="async" class="btn-image-expert" ></Image> 
+                            </StackLayout>
+                        </StackLayout>
+                    </WrapLayout>
+                </ScrollView>
+                <!--
                 <ListView for="item in itemList" @itemTap="onItemTap"  height="88%">
                     <v-template>
                         <FlexboxLayout flexDirection="column" width="100%" height="300">
@@ -18,6 +37,7 @@
                         </FlexboxLayout>
                     </v-template>
                 </ListView>
+                -->
             </StackLayout>  
         </StackLayout> 
     </Page>
@@ -38,7 +58,8 @@
         //Variables
         data() {
             return {
-                itemList: [],
+                itemList1: [],
+                itemList2 : [],
                 urlPhoto : this.$store.getters.getServerPhoto,
                 CategoryFilter : {
                     id : 0,
@@ -91,7 +112,15 @@
                 axios
                 .get(`${this.$store.getters.getServerPath}/auth/experts?`+this.condicion)
                 .then(response => {
-                    this.itemList = response.data.data; 
+                    this.itemList1 = [];
+                    this.itemList2 = [];
+                    for(let i = 0; i < response.data.data.length; i++){
+                        if(i % 2){
+                            this.itemList1.push(response.data.data[i]);
+                        }else{
+                            this.itemList2.push(response.data.data[i]);
+                        }
+                    } 
                 })
                 .catch(response => {
                     console.log(response.data);
@@ -99,16 +128,16 @@
                 });
             },
             onItemTap(event){
-                const view = event.view;
+                /*const view = event.view;
                 const page = view.page;
                 const tappedItem = view.bindingContext;
-
+                */
                 //goToSection(this, ExpertProfile, {tappedItem}, "slide", true);
                 
                 
                 this.$navigateTo(ExpertProfile, {
                     props: { 
-                        context: tappedItem,
+                        context: event,//tappedItem,
                         animated: true,
                         transition: {
                             name: "slide",
@@ -128,6 +157,11 @@
         border-radius: 30%;
         background: #F2F2F2;
         border: solid 1px black;
+    }
+    .btn-image-expert{
+        padding: 5%;
+        border-radius: 100%;
+
     }
 
 </style>
