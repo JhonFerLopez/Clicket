@@ -11,6 +11,7 @@ const store = new Vuex.Store({
     server: "http://clicket.ziel.com.co/api",
     role: 'driver',
     token: '',
+    pagina: 0,
     //Variables Globales
     user: {
       name: '',
@@ -23,6 +24,9 @@ const store = new Vuex.Store({
   mutations: { 
     ADD_TOKEN: (state, payload) => {
       state.token = payload
+    },
+    ADD_PAGINA: (state, payload) => {
+      state.pagina = payload
     },
     ADD_LOGIN_USER: (state, payload) => {
       state.user = payload
@@ -42,6 +46,9 @@ const store = new Vuex.Store({
     addToken: (context, payload) => {
       context.commit('ADD_TOKEN', payload)
     },
+    addPagina: (context, payload) => {
+      context.commit('ADD_PAGINA', payload)
+    },
     addLoginUser: (context, payload) => {
       context.commit('ADD_LOGIN_USER', payload)
     },
@@ -57,6 +64,7 @@ const store = new Vuex.Store({
     getServerPhoto: state => state.serverPhoto,
     getServerPath: state => state.server,
     getToken: state => state.token,
+    getPagina: state => state.pagina,
     getLoginUser: state => state.user,
     getRole: state => state.role,
     isLogged: state => state.logged

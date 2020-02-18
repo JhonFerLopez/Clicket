@@ -3,23 +3,19 @@
         <ActionBar class="ActionBar" flat="true">
             <Label text="CLICKET" horizontalAlignment="center" />
         </ActionBar> 
-        <BottomNavigation>
+        <BottomNavigation :selectedIndex="pagina" @selectedIndexChange="onSelectedIndexChange">
             <TabStrip>
                 <TabStripItem class="navigation__item">
-                    <Label text="Home"></Label>
-                    <Image src.decode="~/assets/images/dashboardpurple.png" class="fas t-36"></Image>
+                    <Image :src.decode="tap0" class="fas t-36"></Image>
                 </TabStripItem>
                 <TabStripItem class="navigation__item">
-                    <Label text="Browse"></Label>
-                    <Image src.decode="~/assets/images/listpurple.png" class="far t-36"></Image>
+                    <Image :src.decode="tap1" class="far t-36"></Image>
                 </TabStripItem>
                 <TabStripItem class="navigation__item">
-                    <Label text="Search"></Label>
-                    <Image src.decode="~/assets/images/searchpurple.png" class="fas t-36"></Image>
+                    <Image :src.decode="tap2" class="fas t-36"></Image>
                 </TabStripItem>                
                 <TabStripItem class="navigation__item">
-                    <Label text="Search"></Label>
-                    <Image src.decode="~/assets/images/userpurple.png" class="fas t-36"></Image>
+                    <Image :src.decode="tap3" class="fas t-36"></Image>
                 </TabStripItem>
             </TabStrip>
 
@@ -64,8 +60,36 @@
     
     //Llamado a componentes
     import CLabel from './../components/CLabel';
-
+    /*switch (this.pagina) {
+        case 1:
+            this.tap1 = "~/assets/images/listpurple.png";
+        break;
+        case 2:
+            this.tap2 = "~/assets/images/searchpurple.png";
+        break;
+        case 3:
+            this.tap3 = "~/assets/images/userpurple.png";
+        break;
+        default:
+            this.tap0 = ;
+        break;
+    } */  
     export default {
+        //Variables
+        data() {
+            return {
+                pagina : this.$store.getters.getPagina,               
+                tap0: this.$store.getters.getPagina
+                    ? "~/assets/images/dashboardpurple.png"
+                    : "~/assets/images/dashboardgrey.png",
+                tap1: "~/assets/images/listgrey.png",
+                tap2: "~/assets/images/searchgrey.png",
+                tap3: "~/assets/images/usergrey.png",
+            };
+        },
+        created() {
+                 
+        },
         //LLamado a Componentes
         components : {
             Interests,
@@ -73,7 +97,12 @@
             User,
             Categories,
             Experts
-        }
+        },
+        methods: {
+            onSelectedIndexChange(event){
+                console.log("hola jhon "+event);
+            }
+        }      
     }
 </script>
 

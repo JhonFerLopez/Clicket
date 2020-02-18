@@ -9,9 +9,10 @@
                         loadMode="async" stretch="aspectFill" colSpan="3">
                     </Image> 
                     <Image src="~/assets/images/BackButtonpurple.png" 
+                        class="go_back" width="10%" height="10%"
                         loadMode="async" stretch="aspectFill" colSpan="3"
                         horizontalAlignment="left" verticalAlignment="top" 
-                        @tap="navigateBack">
+                        @tap="navigateBack" >
                     </Image>
                 </GridLayout>  
                 <StackLayout width="70%" horizontalAlignment="center">
@@ -64,6 +65,7 @@
                 });
             },
             navigateBack(){
+                this.$store.dispatch("addPagina", 0);
                 goToSection(this, this.$router.welcome, {}, "slideRight", true);
             }
         }
@@ -71,5 +73,4 @@
 </script>
 
 <style scoped>
-
 </style>

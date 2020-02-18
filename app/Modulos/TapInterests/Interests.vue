@@ -16,7 +16,7 @@
                         horizontalAlignment="left"
                         verticalAlignment="center"
                     ></TextField>
-                    <Image src="~/assets/images/search.png" width="8%" horizontalAlignment="right"
+                    <Image src="~/assets/images/Grouppurple.png" width="8%" horizontalAlignment="right"
                         height="100%" class="icon" @tap="getInteres" colSpan="3"/>
                 </GridLayout>
             </StackLayout>
@@ -132,21 +132,13 @@
                         if(response.data.page == 1){
                             this.items1 = [];
                             this.items2 = [];
-                            for(let i = 0; i < response.data.data.length; i++){
-                                if(i % 2){
-                                    this.items1.push(response.data.data[i]);
-                                }else{
-                                    this.items2.push(response.data.data[i]);
-                                }
-                            }                            
-                        }else{
-                            for(let i = 0; i < response.data.data.length; i++){
-                                if(i % 2){
-                                    this.items1.push(response.data.data[i]);
-                                }else{
-                                    this.items2.push(response.data.data[i]);
-                                }
-                            } 
+                        }   
+                        for(let i = 0; i < response.data.data.length; i++){
+                            if(i % 2){
+                                this.items1.push(response.data.data[i]);
+                            }else{
+                                this.items2.push(response.data.data[i]);
+                            }
                         }
                         this.totNumPagInt = response.data.count;
                         this.numPagInt = this.numPagInt + 1;

@@ -8,10 +8,12 @@
                     <Image :src="urlPhoto+'/' + expert.picture" 
                         loadMode="async" stretch="aspectFill" colSpan="3">
                     </Image> 
-                    <Button text="<" class="go_back" width="120px"
-                        horizontalAlignment="left" height="120px" 
-                        verticalAlignment="top" @tap="navigateBack">
-                    </Button>
+                    <Image src="~/assets/images/BackButtonpurple.png" 
+                        class="go_back" width="10%" height="10%"
+                        loadMode="async" stretch="aspectFill" colSpan="3"
+                        horizontalAlignment="left" verticalAlignment="top" 
+                        @tap="navigateBack" >
+                    </Image> 
                 </GridLayout>  
                 <StackLayout width="70%" horizontalAlignment="center">
                     <Label :text="expert.name" textWrap="true" class="text-label"></Label> 
@@ -61,6 +63,7 @@ export default {
             });
         },
         navigateBack(){
+            this.$store.dispatch("addPagina", 2);
             goToSection(this, this.$router.welcome, {}, "slideRight", true);
         }
     }

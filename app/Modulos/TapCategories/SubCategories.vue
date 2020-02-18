@@ -1,7 +1,7 @@
 <template>
     <Page >        
         <ActionBar class="ActionBar" flat="true">
-            <NavigationButton @tap="$navigateBack" android.systemIcon="ic_menu_back"/>
+            <NavigationButton @tap="navigateBack" android.systemIcon="ic_menu_back"/>
             <Label text="CLICKET" horizontalAlignment="center" />
         </ActionBar> 
         <StackLayout width="90%" height="100%">
@@ -102,6 +102,7 @@
                 });
             },            
             navigateBack(){
+                this.$store.dispatch("addPagina", 1);
                 goToSection(this, this.$router.welcome, {}, "slideRight", true);
             }
         }
