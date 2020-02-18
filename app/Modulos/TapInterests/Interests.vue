@@ -49,7 +49,8 @@
                 <StackLayout class="btn-button" height="100%" colSpan="3" 
                     horizontalAlignment="right"
                     verticalAlignment="bottom">
-                    <Button text="+" @tap="getInteres" class="btn-mas" ></Button>
+                    <Image src="~/assets/images/more.png" width="12%" horizontalAlignment="right"
+                        height="12%" class="icon" @tap="getInteres" colSpan="3"/>
                 </StackLayout>
             </GridLayout>
         </StackLayout>       
