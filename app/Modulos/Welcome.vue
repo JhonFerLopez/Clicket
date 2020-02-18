@@ -68,7 +68,7 @@
                 pagina : this.$store.getters.getPagina
                 ? this.$store.getters.getPagina
                 : 0,               
-                tap0: "~/assets/images/dashboardgrey.png",
+                tap0: "~/assets/images/dashboardpurple.png",
                 tap1: "~/assets/images/listgrey.png",
                 tap2: "~/assets/images/searchgrey.png",
                 tap3: "~/assets/images/usergrey.png",
@@ -83,57 +83,45 @@
             Experts
         },//Inicializador
         created() {
-            this.getPagination();
         },
         methods: {
-            getPagination(){
-                switch (this.pagina) {
-                    case 1:
-                        this.tap1 = "~/assets/images/listpurple.png";
-                    break;
-                    case 2:
-                        this.tap2 = "~/assets/images/searchpurple.png";
-                    break;
-                    case 3:
-                        this.tap3 = "~/assets/images/userpurple.png";
-                    break;
-                    default:
-                        this.tap0 = "~/assets/images/dashboardpurple.png";
-                    break;
-                }
-            },
             indexChange: function(args) {
                 console.log("values-->  "+Object.values(args));
                 console.log("keys-->  "+Object.keys(args));
                 let newIndex = args.newIndex;
                 let oldIndex = args.oldIndex;
-                switch (newIndex) {
-                    case 1:
-                        this.tap1 = "~/assets/images/listpurple.png";
-                    break;
-                    case 2:
-                        this.tap2 = "~/assets/images/searchpurple.png";
-                    break;
-                    case 3:
-                        this.tap3 = "~/assets/images/userpurple.png";
-                    break;
-                    default:
-                        this.tap0 = "~/assets/images/dashboardpurple.png";
-                    break;
-                }
-                switch (oldIndex) {
-                    case 1:
-                        this.tap1 = "~/assets/images/listgrey.png";
-                    break;
-                    case 2:
-                        this.tap2 = "~/assets/images/searchgrey.png";
-                    break;
-                    case 3:
-                        this.tap3 = "~/assets/images/usergrey.png";
-                    break;
-                    default:
-                        this.tap0 = "~/assets/images/dashboardgrey.png";
-                    break;
+                if(oldIndex < 0){
+                    this.tap0 = "~/assets/images/dashboardpurple.png";
+                } else {
+                    switch (newIndex) {
+                        case 1:
+                            this.tap1 = "~/assets/images/listpurple.png";
+                        break;
+                        case 2:
+                            this.tap2 = "~/assets/images/searchpurple.png";
+                        break;
+                        case 3:
+                            this.tap3 = "~/assets/images/userpurple.png";
+                        break;
+                        default:
+                            this.tap0 = "~/assets/images/dashboardpurple.png";
+                        break;
+                    }
+                    console.log("old "+oldIndex);
+                    switch (oldIndex) {
+                        case 1:
+                            this.tap1 = "~/assets/images/listgrey.png";
+                        break;
+                        case 2:
+                            this.tap2 = "~/assets/images/searchgrey.png";
+                        break;
+                        case 3:
+                            this.tap3 = "~/assets/images/usergrey.png";
+                        break;
+                        default:
+                            this.tap0 = "~/assets/images/dashboardgrey.png";
+                        break;
+                    }
                 }
             }
         }      
