@@ -33,8 +33,26 @@
                             returnKeyType="next"
                             colSpan="3"
                         ></TextField>
-                        <Image :src="image" width="8%" horizontalAlignment="right"
+                        <Image :src="imagePassword" width="8%" horizontalAlignment="right"
                             height="100%" class="icon" @tap="getViewPassword" colSpan="3"/>
+                    </GridLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <GridLayout width="100%" height="100%" 
+                        rows="auto" columns="*, *, *">
+                        <TextField
+                            class="input input-rounded"
+                            ref="password"
+                            hint="Repetir Contraseña"
+                            :secure="secureRepassword"
+                            autocorrect="false"
+                            v-model="user.repassword"
+                            autocapitalizationType="none"
+                            returnKeyType="next"
+                            colSpan="3"
+                        ></TextField>
+                        <Image :src="imageRepassword" width="8%" horizontalAlignment="right"
+                            height="100%" class="icon" @tap="getViewRepassword" colSpan="3"/>
                     </GridLayout>
                 </StackLayout>
                 <StackLayout class="btn-button" height="10%">
@@ -57,14 +75,17 @@ export default {
     //Variables
     data() {
         return { 
-            image: '~/assets/images/pass_false.png',
+            imagePassword: '~/assets/images/pass_false.png',
+            imageRepassword: '~/assets/images/pass_false.png',
             securePassword: true,
+            secureRepassword: true,
             urlPhoto : this.$store.getters.getServerPhoto,
             user: {
                 name: this.$store.getters.getLoginUser.name,
                 last_name: this.$store.getters.getLoginUser.last_name,
                 email: this.$store.getters.getLoginUser.email,
                 password: "",
+                repassword: "",
                 image:""
             }           
         };
@@ -80,41 +101,56 @@ export default {
         },
         getUpdate(){
             if(this.user.name != ""){
-                axios
-                .post(`${this.$store.getters.getServerPath}/auth/user/edit`, {
-                    name: this.user.name,
-                    email: this.user.email
-                })
-                .then(response => {
-                    this.processing = true;
+                if (!(this.user.password === this.user.repassword)) {
                     alert({
-                        title: "Actualización Exitosa",                        
+                        title: "Contraseñas diferentes",
+                        message: "Las contraseñas no coinciden",
                         okButtonText: "OK"
-                    }).then(() => {
-                        let user = response.data.user;
-                        //Almacenar usuario
-                        this.$store.dispatch("addLoginUser", response.data.user);
                     });
-                })
-                .catch(err => {
-                        console.dir(err.response);
-                    if (err.response.status == 422) {
+                } else {
+                    axios
+                    .post(`${this.$store.getters.getServerPath}/auth/user/edit`, {
+                        name: this.user.name,
+                        email: this.user.email,
+                        password: this.user.password
+                    })
+                    .then(response => {
                         alert({
-                            title: "Error al Actualizar usuario",
-                            message: "Problemas al actualizar el usuario",
-                            okButtonText: "Error"
+                            title: "Actualización Exitosa",                        
+                            okButtonText: "OK"
+                        }).then(() => {
+                            //Almacenar usuario
+                            this.$store.dispatch("addLoginUser",this.user);
                         });
-                    }
-                });
+                    })
+                    .catch(err => {
+                            console.dir(err.response);
+                        if (err.response.status == 422) {
+                            alert({
+                                title: "Error al Actualizar usuario",
+                                message: "Problemas al actualizar el usuario",
+                                okButtonText: "Error"
+                            });
+                        }
+                    });
+                }
             }
         },
         getViewPassword(){
-            console.log("hola mundo  --> "+this.image);
             this.securePassword = !this.securePassword;
             if(this.securePassword){
-                this.image = '~/assets/images/pass_false.png'
+                this.imagePassword = '~/assets/images/pass_false.png'
             }else{
-                this.image = '~/assets/images/pass_true.png'
+                this.imagePassword = '~/assets/images/pass_true.png'
+            }
+        }
+        ,
+        getViewRepassword(){
+            this.secureRepassword = !this.secureRepassword;
+            if(this.secureRepassword){
+                this.imageRepassword = '~/assets/images/pass_false.png'
+            }else{
+                this.imageRepassword = '~/assets/images/pass_true.png'
             }
         }
     }

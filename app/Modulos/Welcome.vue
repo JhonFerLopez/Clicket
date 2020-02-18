@@ -3,7 +3,7 @@
         <ActionBar class="ActionBar" flat="true">
             <Label text="CLICKET" horizontalAlignment="center" />
         </ActionBar> 
-        <BottomNavigation :selectedIndex="pagina" @selectedIndexChange="onSelectedIndexChange">
+        <BottomNavigation :selectedIndex="pagina" @selectedIndexChanged="indexChange">
             <TabStrip>
                 <TabStripItem class="navigation__item">
                     <Image :src.decode="tap0" class="fas t-36"></Image>
@@ -60,35 +60,19 @@
     
     //Llamado a componentes
     import CLabel from './../components/CLabel';
-    /*switch (this.pagina) {
-        case 1:
-            this.tap1 = "~/assets/images/listpurple.png";
-        break;
-        case 2:
-            this.tap2 = "~/assets/images/searchpurple.png";
-        break;
-        case 3:
-            this.tap3 = "~/assets/images/userpurple.png";
-        break;
-        default:
-            this.tap0 = ;
-        break;
-    } */  
+
     export default {
         //Variables
         data() {
             return {
-                pagina : this.$store.getters.getPagina,               
-                tap0: this.$store.getters.getPagina
-                    ? "~/assets/images/dashboardpurple.png"
-                    : "~/assets/images/dashboardgrey.png",
+                pagina : this.$store.getters.getPagina
+                ? this.$store.getters.getPagina
+                : 0,               
+                tap0: "~/assets/images/dashboardgrey.png",
                 tap1: "~/assets/images/listgrey.png",
                 tap2: "~/assets/images/searchgrey.png",
                 tap3: "~/assets/images/usergrey.png",
             };
-        },
-        created() {
-                 
         },
         //LLamado a Componentes
         components : {
@@ -97,10 +81,60 @@
             User,
             Categories,
             Experts
+        },//Inicializador
+        created() {
+            this.getPagination();
         },
         methods: {
-            onSelectedIndexChange(event){
-                console.log("hola jhon "+event);
+            getPagination(){
+                switch (this.pagina) {
+                    case 1:
+                        this.tap1 = "~/assets/images/listpurple.png";
+                    break;
+                    case 2:
+                        this.tap2 = "~/assets/images/searchpurple.png";
+                    break;
+                    case 3:
+                        this.tap3 = "~/assets/images/userpurple.png";
+                    break;
+                    default:
+                        this.tap0 = "~/assets/images/dashboardpurple.png";
+                    break;
+                }
+            },
+            indexChange: function(args) {
+                console.log("values-->  "+Object.values(args));
+                console.log("keys-->  "+Object.keys(args));
+                let newIndex = args.newIndex;
+                let oldIndex = args.oldIndex;
+                switch (newIndex) {
+                    case 1:
+                        this.tap1 = "~/assets/images/listpurple.png";
+                    break;
+                    case 2:
+                        this.tap2 = "~/assets/images/searchpurple.png";
+                    break;
+                    case 3:
+                        this.tap3 = "~/assets/images/userpurple.png";
+                    break;
+                    default:
+                        this.tap0 = "~/assets/images/dashboardpurple.png";
+                    break;
+                }
+                switch (oldIndex) {
+                    case 1:
+                        this.tap1 = "~/assets/images/listgrey.png";
+                    break;
+                    case 2:
+                        this.tap2 = "~/assets/images/searchgrey.png";
+                    break;
+                    case 3:
+                        this.tap3 = "~/assets/images/usergrey.png";
+                    break;
+                    default:
+                        this.tap0 = "~/assets/images/dashboardgrey.png";
+                    break;
+                }
             }
         }      
     }

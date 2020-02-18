@@ -83,6 +83,7 @@
             console.log(response.data);
             
             this.processing = false;
+            this.$store.dispatch("addPagina", 0);
             this.$store.dispatch("addUserEmail", this.user.email);
 
             if (response.data.exist == 0) {
