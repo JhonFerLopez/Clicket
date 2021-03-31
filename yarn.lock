@@ -746,6 +746,11 @@
     tns-core-modules-widgets "6.3.2"
     tslib "1.10.0"
 
+"@nativescript/theme@^2.3.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@nativescript/theme/-/theme-2.5.0.tgz#4db50a2c9353ad3b859d3345eaed04bcef3c3e31"
+  integrity sha512-aFcJPcCEdIE+YvO5AtD70KmlYbm7d98dllaeqvaBwZrVgKzngRUXlBe4sjnfAuo7+1U9hpH2A4zBUPnXcKc+zw==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -6466,9 +6471,9 @@ xtend@^4.0.0, xtend@~4.0.1:
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
 
 y18n@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/y18n/-/y18n-3.2.1.tgz#6d15fba884c08679c0d77e88e7759e811e07fa41"
-  integrity sha1-bRX7qITAhnnA136I53WegR4H+kE=
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-3.2.2.tgz#85c901bd6470ce71fc4bb723ad209b70f7f28696"
+  integrity sha512-uGZHXkHnhF0XeeAPgnKfPv1bgKAYyVvmNL1xlKsPYZPaIHxGti2hHqvOCQv71XMsLxu1QjergkqogUnms5D3YQ==
 
 "y18n@^3.2.1 || ^4.0.0", y18n@^4.0.0:
   version "4.0.0"
